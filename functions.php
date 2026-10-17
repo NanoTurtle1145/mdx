@@ -1,9 +1,55 @@
 <?php
-$mdx_all_options = get_option("mdx_all_options");
+/**
+ * MDx 主题主函数文件
+ *
+ * 已适配 WordPress 6.4 ~ 7.1 与 PHP 7.4 ~ 8.3。
+ * 说明：本文件在 WordPress 的 init 动作之前执行，因此这里不能直接调用
+ * 需要 init 之后才可用的翻译函数（__() 等），否则 WordPress 6.7+ 会
+ * 报 "_load_textdomain_just_in_time was called incorrectly"。
+ * 解决办法是在文件最顶部显式载入主题翻译。
+ */
+if (function_exists('load_theme_textdomain')) {
+    load_theme_textdomain('mdx', get_template_directory() . '/languages');
+}
 
+$mdx_all_options = get_option('mdx_all_options');
+if (!is_array($mdx_all_options)) {
+    // 全新安装或数据损坏时 get_option() 可能返回 false，
+    // PHP 8.1+ 不允许再把 false 当作数组自动创建键（deprecated）。
+    $mdx_all_options = array();
+}
+
+// 首次安装 / 首次激活时一次性写入全部默认值（单次写入，避免并发请求互相覆盖）。
+if (empty($mdx_all_options) || !get_option('mdx_first_init')) {
+    require __DIR__ . '/includes/default_value.php';
+    $mdx_install_flag = 'normal';
+    if (stripos(explode('//', home_url())[1], '/')) {
+        $mdx_install_flag = 'sub';
+    }
+    $mdx_default_values['mdx_install'] = $mdx_install_flag;
+    $mdx_all_options = array_merge($mdx_default_values, $mdx_all_options);
+    update_option('mdx_all_options', $mdx_all_options);
+    update_option('mdx_first_init', '1');
+}
+$GLOBALS['mdx_all_options'] = $mdx_all_options;
+
+/**
+ * 更新一个主题选项。
+ *
+ * 注意：必须与数据库中已有的选项合并后再写入，否则当 $GLOBALS['mdx_all_options']
+ * 只包含当前请求读取过的少量选项时，会把后台保存的其它选项整体覆盖掉。
+ */
 function mdx_update_option($option_name, $option_value) {
-    $GLOBALS['mdx_all_options'][$option_name] = $option_value;
-    update_option('mdx_all_options', $GLOBALS['mdx_all_options']);
+    $all_options = get_option('mdx_all_options');
+    if (!is_array($all_options)) {
+        $all_options = array();
+    }
+    if (isset($GLOBALS['mdx_all_options']) && is_array($GLOBALS['mdx_all_options'])) {
+        $all_options = array_merge($all_options, $GLOBALS['mdx_all_options']);
+    }
+    $all_options[$option_name] = $option_value;
+    $GLOBALS['mdx_all_options'] = $all_options;
+    update_option('mdx_all_options', $all_options);
     return true;
 }
 
@@ -12,7 +58,7 @@ function mdx_get_option($option_name) {
         return $GLOBALS['mdx_all_options'][$option_name];
     }
 
-    require('includes/default_value.php');
+    require __DIR__ . '/includes/default_value.php';
     if (isset($mdx_default_values[$option_name])) {
         mdx_update_option($option_name, $mdx_default_values[$option_name]);
         return $mdx_default_values[$option_name];
@@ -49,65 +95,58 @@ function mdx_get_now_url($is_post = false, $post_id = 0) {
 }
 
 //激活功能
+// 主题基础支持（经典主题在 WordPress 6.x / 7.x 中所需的常规声明）
 add_theme_support('post-thumbnails');
 add_theme_support('post-formats', array('image', 'link', 'status', 'video', 'audio'));
-register_nav_menus(array('mdx_menu' => __('抽屉菜单', 'mdx')));
-register_sidebar(
-    array(
-        'name' => __('右侧菜单', 'mdx'),
-        'id' => 'widget_right',
-        'description' => __('在每个页面的右侧，默认隐藏，可以通过滑动或按钮调出。', 'mdx'),
-        'before_widget' => '<div class="mdui-card mdx-widget %2$s">',
-        'after_widget' => '</div></div>',
-        'before_title' => '<div class="mdui-card-primary"><div class="mdui-card-primary-title">',
-        'after_title' => '</div></div><div class="mdui-card-content mdui-typo">'
-    )
-);
-if (mdx_get_option('mdx_title_med') == "wp") {
-    add_theme_support('title-tag');
-}
+add_theme_support('html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script'));
+add_theme_support('automatic-feed-links');
+add_theme_support('responsive-embeds');
 
 remove_filter('the_title', 'wptexturize');
 remove_filter('wp_title', 'wptexturize');
 remove_filter('single_post_title', 'wptexturize');
 
-//初始化
-if (!get_option('mdx_first_init')) {
-    //用途仅为统计安装量 mdx_key为发送请求时间戳的md5值 mdx_first_init不会在除此外的任何地方被调用
-    if (function_exists('file_get_contents')) {
-        $opt = array(
-            'http' => array('method' => "GET", 'header' => "User-Agent: MDxThemeinWordPress\r\n")
-        );
-        $contexts = stream_context_create($opt);
-        $mdx_token = file_get_contents('https://mdxupdate.flyhigher.top/mdx/gettoken/', false, $contexts);
-        $mdx_key = file_get_contents('https://mdxupdate.flyhigher.top/mdx/getkey/index.php?hostname='.$_SERVER['HTTP_HOST'].'&token='.md5($mdx_token), false, $contexts);
-        update_option('mdx_first_init', 'fun-'.md5($mdx_key));
-    } else {
-        update_option('mdx_first_init', 'false');
-    }
-    include_once('includes/admin_init_fn.php');
+/**
+ * 注册导航菜单与侧边栏。
+ *
+ * 说明：这些注册项包含需要翻译的字符串，必须放在 after_setup_theme 中执行，
+ * 否则 WordPress 6.7+ 会报 "_load_textdomain_just_in_time ... triggered too early"。
+ */
+function mdx_register_theme_menus() {
+    register_nav_menus(array('mdx_menu' => __('抽屉菜单', 'mdx')));
+    register_sidebar(
+        array(
+            'name' => __('右侧菜单', 'mdx'),
+            'id' => 'widget_right',
+            'description' => __('在每个页面的右侧，默认隐藏，可以通过滑动或按钮调出。', 'mdx'),
+            'before_widget' => '<div class="mdui-card mdx-widget %2$s">',
+            'after_widget' => '</div></div>',
+            'before_title' => '<div class="mdui-card-primary"><div class="mdui-card-primary-title">',
+            'after_title' => '</div></div><div class="mdui-card-content mdui-typo">'
+        )
+    );
+}
+add_action('after_setup_theme', 'mdx_register_theme_menus');
+
+if (mdx_get_option('mdx_title_med') == "wp") {
+    add_theme_support('title-tag');
 }
 
-include_once('includes/admin_init_ver.php');
+// 说明：默认选项已在文件顶部一次性初始化，不再向任何第三方服务器发送请求。
+
+include_once __DIR__ . '/includes/admin_init_ver.php';
+
+// 增强选项与兼容层（阅读时长、版权协议、自定义 CSS、登录页美化等）
+require_once __DIR__ . '/includes/mdx-extra.php';
 
 //后台菜单添加
 if (is_admin()) {
-    include_once('admin_functions.php');
+    include_once __DIR__ . '/admin_functions.php';
 }
 
-//主题升级
-require 'plugin-update-checker/plugin-update-checker.php';
-$mdxUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-    'https://cdn.jsdelivr.net/gh/axton-the-robot/mdx-assets@latest/info.json',
-    __FILE__,
-    'mdx'
-);
-
-//多语言支持
-function mdx_multilang() {
-    load_theme_textdomain('mdx', get_template_directory().'/languages');
-}
-add_action('after_setup_theme', 'mdx_multilang');
+// 说明：已移除主题自带的 Plugin Update Checker。
+// 原因：1) 上游更新接口已停止维护；2) 本主题为定制版本，自动更新会覆盖本地修改。
+// 如需恢复，请重新安装 plugin-update-checker 并在下方自行调用 Puc_v4_Factory。
 
 //自定义菜单样式
 function mdx_menu_classes($classes, $item, $args)//求问这个$item的作用是什么？
@@ -136,7 +175,8 @@ if (mdx_get_option("mdx_use_cdn") === "custom") {
 function mdx_css() {
     global $files_root;
     wp_register_style('mdx_mdui_css', $files_root.'/mdui/css/mdui.min.css', '', '');
-    wp_register_style('mdx_style_css', $files_root.'/style.css', '', '');
+    // style.css 包含本版本的定制样式，始终从本地主题目录加载（不受 CDN 选项影响）
+    wp_register_style('mdx_style_css', get_template_directory_uri().'/style.css', '', '');
     wp_enqueue_style('mdx_mdui_css');
     wp_enqueue_style('mdx_style_css');
     if (mdx_get_option('mdx_styles_dark') === "oled" || mdx_get_option('mdx_night_style') === "oled") {
@@ -343,9 +383,12 @@ function mdx_comment_format($comment, $args, $depth) {
 
 //回复的评论加@
 function comment_add_at($comment_text, $comment) {
-    if ($comment->comment_parent > 0) {
-        $comment_text = '<a rel="nofollow" class="comment_at" href="#comment-'.$comment->comment_parent.'">@'.get_comment_author($comment->comment_parent).'：</a> '.$comment_text;
+    // WordPress 7.x 中 comment_text 过滤器可能在不传评论对象（或传入 null）时被调用，
+    // 这里增加类型判断，避免 "Attempt to read property on null" 警告。
+    if (!($comment instanceof WP_Comment) || (int) $comment->comment_parent <= 0) {
+        return $comment_text;
     }
+    $comment_text = '<a rel="nofollow" class="comment_at" href="#comment-'.$comment->comment_parent.'">@'.get_comment_author($comment->comment_parent).'：</a> '.$comment_text;
     return $comment_text;
 }
 add_filter('comment_text', 'comment_add_at', 10, 2);
@@ -453,9 +496,10 @@ function mdx_blogroll_inner_meta_box($post) {
 }
 
 function mdx_blogroll_save_meta_box($link_rel) {
-    $rel = trim(str_replace('nofollow', '', $link_rel));
-    if ($_POST['mdx_blogroll_nofollow_checkbox'])
+    $rel = trim(str_replace('nofollow', '', (string) $link_rel));
+    if (!empty($_POST['mdx_blogroll_nofollow_checkbox'])) {
         $rel .= ' nofollow';
+    }
     return trim($rel);
 }
 add_action('load-link.php', 'mdx_blogroll_nofollow');
@@ -464,6 +508,13 @@ add_action('load-link-add.php', 'mdx_blogroll_nofollow');
 //获取摘要
 function mdx_get_post_excerpt($post, $excerpt_length = 150) {
     if (!$post) $post = get_post();
+    if (!$post) return '';
+
+    // 新增选项：统一指定摘要字数（0 表示沿用各布局的预设值）
+    $mdx_custom_excerpt_length = (int) mdx_get_option('mdx_excerpt_length');
+    if ($mdx_custom_excerpt_length > 0) {
+        $excerpt_length = $mdx_custom_excerpt_length;
+    }
 
     $post_excerpt = $post->post_excerpt;
     if ($post_excerpt == '') {
@@ -471,7 +522,12 @@ function mdx_get_post_excerpt($post, $excerpt_length = 150) {
         $post_content = do_shortcode($post_content);
         $post_content = wp_strip_all_tags($post_content);
 
-        $post_excerpt = mb_strimwidth($post_content, 0, $excerpt_length, '…', 'utf-8');
+        if (function_exists('mb_strimwidth')) {
+            $post_excerpt = mb_strimwidth($post_content, 0, $excerpt_length, '…', 'utf-8');
+        } else {
+            // mbstring 未启用时的兼容回退
+            $post_excerpt = wp_html_excerpt($post_content, $excerpt_length, '…');
+        }
     }
 
     $post_excerpt = wp_strip_all_tags($post_excerpt);
@@ -486,31 +542,50 @@ function mdx_lazyload_image($content) {
     return preg_replace_callback('#<(img)([^>]+?)(>(.*?)</\\1>|[/]?>)#si', 'mdx_process_image', $content);
 }
 
+/**
+ * 安全读取 wp_kses_hair() 解析出的图片属性值。
+ *
+ * @param array  $img   属性数组。
+ * @param string $name  属性名。
+ * @return string 属性值，不存在时返回空字符串。
+ */
+function mdx_get_img_attr_value($img, $name) {
+    return isset($img[$name]['value']) ? $img[$name]['value'] : '';
+}
+
 function mdx_process_image($matches) {
     $placeholder_image = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
-    $old_attributes_str = $matches[2];
+    $old_attributes_str = isset($matches[2]) ? $matches[2] : '';
     $img = wp_kses_hair($old_attributes_str, wp_allowed_protocols());
-    if (empty($img['src'])) {
+    $src = mdx_get_img_attr_value($img, 'src');
+    if ($src === '') {
         return $matches[0];
     }
-    isset($img['sizes']) ? $mdx_sizes = ' sizes="'.$img['sizes']['value'].'"' : $mdx_sizes = '';
-    isset($img['srcset']) ? $mdx_srcset = ' data-srcset="'.$img['srcset']['value'].'"' : $mdx_srcset = '';
-    isset($img['style']) ? $mdx_img_style = ' style="'.$img['style']['value'].'"' : $mdx_img_style = '';
-    isset($img['width']) ? $mdx_img_width = ' width="'.$img['width']['value'].'"' : $mdx_img_width = '';
-    isset($img['width']) ? $mdx_figure_width = 'max-width:'.$img['width']['value'].'px' : $mdx_figure_width = '';
-    isset($img['height']) ? $mdx_img_height = ' height="'.$img['height']['value'].'"' : $mdx_img_height = '';
-    (isset($img['height']) && isset($img['width'])) ? $mdx_con_paading = $img['height']['value'] / $img['width']['value'] * 100 : $mdx_con_paading = 50;
-    isset($img['class']) ? $mdx_img_class = $img['class']['value'].' ' : $mdx_img_class = '';
-    isset($img['alt']) ? $mdx_img_alt = ' alt="'.$img['alt']['value'].'"' : $mdx_img_alt = '';
-    ($mdx_img_alt == '' || $mdx_img_alt == ' alt=""') ? $mdx_img_title = ' title="'.get_the_title().'"' : $mdx_img_title = ' title="'.$img['alt']['value'].'"';
-    ($mdx_img_alt == '' || $mdx_img_alt == ' alt=""') ? $mdx_img_alt = ' alt="'.$img['src']['value'].'"' : $mdx_img_alt = ' alt="'.$img['alt']['value'].'"';
+    $mdx_sizes = mdx_get_img_attr_value($img, 'sizes');
+    $mdx_sizes = $mdx_sizes !== '' ? ' sizes="'.$mdx_sizes.'"' : '';
+    $mdx_srcset = mdx_get_img_attr_value($img, 'srcset');
+    $mdx_srcset = $mdx_srcset !== '' ? ' data-srcset="'.$mdx_srcset.'"' : '';
+    $mdx_img_style = mdx_get_img_attr_value($img, 'style');
+    $mdx_img_style = $mdx_img_style !== '' ? ' style="'.$mdx_img_style.'"' : '';
+    $mdx_img_width = mdx_get_img_attr_value($img, 'width');
+    $mdx_img_width = $mdx_img_width !== '' ? ' width="'.$mdx_img_width.'"' : '';
+    $mdx_figure_width = mdx_get_img_attr_value($img, 'width');
+    $mdx_figure_width = $mdx_figure_width !== '' ? 'max-width:'.$mdx_figure_width.'px' : '';
+    $mdx_img_height = mdx_get_img_attr_value($img, 'height');
+    $mdx_img_height = $mdx_img_height !== '' ? ' height="'.$mdx_img_height.'"' : '';
+    $mdx_con_paading = (mdx_get_img_attr_value($img, 'height') !== '' && mdx_get_img_attr_value($img, 'width') !== '' && (float) mdx_get_img_attr_value($img, 'width') > 0) ? mdx_get_img_attr_value($img, 'height') / mdx_get_img_attr_value($img, 'width') * 100 : 50;
+    $mdx_img_class = mdx_get_img_attr_value($img, 'class');
+    $mdx_img_class = $mdx_img_class !== '' ? $mdx_img_class.' ' : '';
+    $mdx_img_alt = mdx_get_img_attr_value($img, 'alt');
+    $mdx_img_title = ' title="'.($mdx_img_alt !== '' ? $mdx_img_alt : get_the_title()).'"';
+    $mdx_img_alt = ' alt="'.($mdx_img_alt !== '' ? $mdx_img_alt : $src).'"';
     if ($mdx_img_class === "wp-smiley ") {
         return $matches[0];
     }
     if (mdx_get_option("mdx_lazyload_fallback") == "true") {
-        $html = '<img'.$mdx_img_width.''.$mdx_img_height.' class="'.$mdx_img_class.'lazyload"'.$mdx_img_style.$mdx_img_title.' src="data:image/gif;base64,R0lGODlhAgABAIAAALGxsQAAACH5BAAAAAAALAAAAAACAAEAAAICBAoAOw==" data-src="'.$img['src']['value'].'"'.$mdx_img_alt.$mdx_srcset.''.$mdx_sizes.'>';
+        $html = '<img'.$mdx_img_width.''.$mdx_img_height.' class="'.$mdx_img_class.'lazyload"'.$mdx_img_style.$mdx_img_title.' src="data:image/gif;base64,R0lGODlhAgABAIAAALGxsQAAACH5BAAAAAAALAAAAAACAAEAAAICBAoAOw==" data-src="'.$src.'"'.$mdx_img_alt.$mdx_srcset.''.$mdx_sizes.'>';
     } else {
-        $html = '<figure class="mdx-lazyload-container" style="'.$mdx_figure_width.'"><div style="padding-top:'.strval($mdx_con_paading).'%"></div><div class="mdx-img-loading-sp mdui-valign"><div><div class="mdui-spinner"></div></div></div><img'.$mdx_img_width.''.$mdx_img_height.' class="'.$mdx_img_class.'lazyload"'.$mdx_img_style.$mdx_img_title.' src="'.$placeholder_image.'" data-src="'.$img['src']['value'].'"'.$mdx_img_alt.$mdx_srcset.''.$mdx_sizes.'></figure>';
+        $html = '<figure class="mdx-lazyload-container" style="'.$mdx_figure_width.'"><div style="padding-top:'.strval($mdx_con_paading).'%"></div><div class="mdx-img-loading-sp mdui-valign"><div><div class="mdui-spinner"></div></div></div><img'.$mdx_img_width.''.$mdx_img_height.' class="'.$mdx_img_class.'lazyload"'.$mdx_img_style.$mdx_img_title.' src="'.$placeholder_image.'" data-src="'.$src.'"'.$mdx_img_alt.$mdx_srcset.''.$mdx_sizes.'></figure>';
     }
     return $html;
 }
@@ -524,18 +599,25 @@ function mdx_lazyload_avatar($content) {
 
 function mdx_process_avatar($matches) {
     $placeholder_image = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
-    $old_attributes_str = $matches[2];
+    $old_attributes_str = isset($matches[2]) ? $matches[2] : '';
     $img = wp_kses_hair($old_attributes_str, wp_allowed_protocols());
-    if (empty($img['src'])) {
+    $src = mdx_get_img_attr_value($img, 'src');
+    if ($src === '') {
         return $matches[0];
     }
-    isset($img['sizes']) ? $mdx_sizes = ' sizes="'.$img['sizes']['value'].'"' : $mdx_sizes = '';
-    isset($img['srcset']) ? $mdx_srcset = ' data-srcset="'.$img['srcset']['value'].'"' : $mdx_srcset = '';
-    isset($img['width']) ? $mdx_img_width = ' width="'.$img['width']['value'].'"' : $mdx_img_width = '';
-    isset($img['height']) ? $mdx_img_height = ' height="'.$img['height']['value'].'"' : $mdx_img_height = '';
-    isset($img['class']) ? $mdx_img_class = $img['class']['value'].' ' : $mdx_img_class = '';
-    isset($img['alt']) ? $mdx_img_alt = ' alt="'.$img['alt']['value'].'"' : $mdx_img_alt = '';
-	return '<img'.$mdx_img_width.''.$mdx_img_height.' class="'.$mdx_img_class.'lazyload mdx-avatar-lazyload" src="'.$placeholder_image.'" data-src="'.$img['src']['value'].'"'.$mdx_img_alt.$mdx_srcset.''.$mdx_sizes.'>';
+    $mdx_sizes = mdx_get_img_attr_value($img, 'sizes');
+    $mdx_sizes = $mdx_sizes !== '' ? ' sizes="'.$mdx_sizes.'"' : '';
+    $mdx_srcset = mdx_get_img_attr_value($img, 'srcset');
+    $mdx_srcset = $mdx_srcset !== '' ? ' data-srcset="'.$mdx_srcset.'"' : '';
+    $mdx_img_width = mdx_get_img_attr_value($img, 'width');
+    $mdx_img_width = $mdx_img_width !== '' ? ' width="'.$mdx_img_width.'"' : '';
+    $mdx_img_height = mdx_get_img_attr_value($img, 'height');
+    $mdx_img_height = $mdx_img_height !== '' ? ' height="'.$mdx_img_height.'"' : '';
+    $mdx_img_class = mdx_get_img_attr_value($img, 'class');
+    $mdx_img_class = $mdx_img_class !== '' ? $mdx_img_class.' ' : '';
+    $mdx_img_alt = mdx_get_img_attr_value($img, 'alt');
+    $mdx_img_alt = $mdx_img_alt !== '' ? ' alt="'.$mdx_img_alt.'"' : '';
+	return '<img'.$mdx_img_width.''.$mdx_img_height.' class="'.$mdx_img_class.'lazyload mdx-avatar-lazyload" src="'.$placeholder_image.'" data-src="'.$src.'"'.$mdx_img_alt.$mdx_srcset.''.$mdx_sizes.'>';
 }
 
 function filter_ptags_on_images($content) {
@@ -792,14 +874,14 @@ function mdx_register_button($buttons) {
 }
 
 function mdx_add_plugin($plugin_array) {
-    $plugin_array['mdx_fold'] = get_bloginfo('template_url').'/js/sc1.js';
-    $plugin_array['mdx_warning'] = get_bloginfo('template_url').'/js/sc1.js';
-    $plugin_array['mdx_table'] = get_bloginfo('template_url').'/js/sc1.js';
-    $plugin_array['mdx_progress'] = get_bloginfo('template_url').'/js/sc1.js';
-    $plugin_array['mdx_post'] = get_bloginfo('template_url').'/js/sc1.js';
-    $plugin_array['mdx_github'] = get_bloginfo('template_url').'/js/sc1.js';
-    $plugin_array['mdx_ad'] = get_bloginfo('template_url').'/js/sc1.js';
-    $plugin_array['mdx_list'] = get_bloginfo('template_url').'/js/sc1.js';
+    $plugin_array['mdx_fold'] = get_template_directory_uri().'/js/sc1.js';
+    $plugin_array['mdx_warning'] = get_template_directory_uri().'/js/sc1.js';
+    $plugin_array['mdx_table'] = get_template_directory_uri().'/js/sc1.js';
+    $plugin_array['mdx_progress'] = get_template_directory_uri().'/js/sc1.js';
+    $plugin_array['mdx_post'] = get_template_directory_uri().'/js/sc1.js';
+    $plugin_array['mdx_github'] = get_template_directory_uri().'/js/sc1.js';
+    $plugin_array['mdx_ad'] = get_template_directory_uri().'/js/sc1.js';
+    $plugin_array['mdx_list'] = get_template_directory_uri().'/js/sc1.js';
     return $plugin_array;
 }
 
@@ -922,27 +1004,28 @@ function create_meta_box() {
     add_meta_box('mdx_post_metaboxes_1', __('文章设置', 'mdx'), 'mdx_post_metaboxes_1', 'post', 'side', 'low');
     add_meta_box('mdx_post_metaboxes_2', __('文末信息', 'mdx'), 'mdx_post_metaboxes_2', 'post', 'normal', 'low');
 }
-add_action('admin_menu', 'create_meta_box');
+// 使用正确的 add_meta_boxes 钩子（旧代码挂在 admin_menu 上，虽然可用但不规范）
+add_action('add_meta_boxes', 'create_meta_box');
 
 function mdx_save_postdata_1($post_id, $post) {
-    if (!$_POST['informations_noncename'] || !wp_verify_nonce($_POST['informations_noncename'], plugin_basename(__FILE__))) {
-        return $post->ID;
+    // 自动保存、修订版本、自动草稿、批量编辑等场景下不处理，避免 PHP 警告与元数据被清空
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
     }
-    if ('page' == $_POST['post_type']) {
-        if (!current_user_can('edit_page', $post_id))
-            return $post->ID;
-    } else {
-        if (!current_user_can('edit_post', $post_id))
-            return $post->ID;
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+        return;
     }
-    $data = $_POST["informations_value"];
-    if (!add_post_meta((int)$post_id, "informations_value", (string)$data, true)) {
-        update_post_meta((int)$post_id, "informations_value", (string)$data);
+    if (empty($_POST['informations_noncename']) || !wp_verify_nonce($_POST['informations_noncename'], plugin_basename(__FILE__))) {
+        return;
     }
-    $data1 = $_POST["mdx_styles"];
-    if (!add_post_meta((int)$post_id, "mdx_styles", (string)$data1, true)) {
-        update_post_meta((int)$post_id, "mdx_styles", (string)$data1);
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
     }
+
+    if (isset($_POST['informations_value'])) {
+        update_post_meta((int) $post_id, 'informations_value', wp_kses_post(wp_unslash($_POST['informations_value'])));
+    }
+
     $mdx_color_arr = array(
         'red' => '#f44336',
         'pink' => '#e91e63',
@@ -966,13 +1049,6 @@ function mdx_save_postdata_1($post_id, $post) {
         'white' => '#9e9e9e',
         'def' => 'def',
     );
-    if (!add_post_meta((int)$post_id, "mdx_styles_hex", $mdx_color_arr[(string)$data1], true)) {
-        update_post_meta((int)$post_id, "mdx_styles_hex", $mdx_color_arr[(string)$data1]);
-    }
-    $data2 = $_POST["mdx_styles_act"];
-    if (!add_post_meta((int)$post_id, "mdx_styles_act", (string)$data2, true)) {
-        update_post_meta((int)$post_id, "mdx_styles_act", (string)$data2);
-    }
     $mdx_act_arr = array(
         'red' => '#ff5252',
         'pink' => '#ff4081',
@@ -992,16 +1068,31 @@ function mdx_save_postdata_1($post_id, $post) {
         'deep-orange' => '#ff6e40',
         'def' => 'def',
     );
-    if (!add_post_meta((int)$post_id, "mdx_styles_act_hex", $mdx_act_arr[(string)$data2], true)) {
-        update_post_meta((int)$post_id, "mdx_styles_act_hex", $mdx_act_arr[(string)$data2]);
+
+    $mdx_style_value = isset($_POST['mdx_styles']) ? sanitize_text_field(wp_unslash($_POST['mdx_styles'])) : null;
+    if ($mdx_style_value !== null) {
+        update_post_meta((int) $post_id, 'mdx_styles', $mdx_style_value);
+        if (isset($mdx_color_arr[$mdx_style_value])) {
+            update_post_meta((int) $post_id, 'mdx_styles_hex', $mdx_color_arr[$mdx_style_value]);
+        }
     }
-    $data3 = $_POST["mdx_post_style"];
-    if (!add_post_meta((int)$post_id, "mdx_post_style", (string)$data3, true)) {
-        update_post_meta((int)$post_id, "mdx_post_style", (string)$data3);
+
+    $mdx_act_value = isset($_POST['mdx_styles_act']) ? sanitize_text_field(wp_unslash($_POST['mdx_styles_act'])) : null;
+    if ($mdx_act_value !== null) {
+        update_post_meta((int) $post_id, 'mdx_styles_act', $mdx_act_value);
+        if (isset($mdx_act_arr[$mdx_act_value])) {
+            update_post_meta((int) $post_id, 'mdx_styles_act_hex', $mdx_act_arr[$mdx_act_value]);
+        }
     }
-    $data4 = $_POST['mdx_post_show'];
-    if (!add_post_meta((int)$post_id, "mdx_post_show", (string)$data4, true)) {
-        update_post_meta((int)$post_id, "mdx_post_show", (string)$data4);
+
+    $mdx_post_style_value = isset($_POST['mdx_post_style']) ? sanitize_text_field(wp_unslash($_POST['mdx_post_style'])) : null;
+    if ($mdx_post_style_value !== null) {
+        update_post_meta((int) $post_id, 'mdx_post_style', $mdx_post_style_value);
+    }
+
+    $mdx_post_show_value = isset($_POST['mdx_post_show']) ? sanitize_text_field(wp_unslash($_POST['mdx_post_show'])) : null;
+    if ($mdx_post_show_value !== null) {
+        update_post_meta((int) $post_id, 'mdx_post_show', $mdx_post_show_value);
     }
 }
 add_action('save_post', 'mdx_save_postdata_1', 10, 2);

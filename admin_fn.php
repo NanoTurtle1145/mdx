@@ -92,6 +92,16 @@ wp_enqueue_media();
 		mdx_update_option( 'mdx_use_cdn', sanitize_text_field( $_POST['mdx_use_cdn'] ) );
 		mdx_update_option( 'mdx_custom_cdn_root', esc_url_raw( $_POST['mdx_custom_cdn_root'] ) );
 		mdx_update_option( 'mdx_jquery', sanitize_text_field( $_POST['mdx_jquery'] ) );
+
+		// ===== 2.1.0 新增：阅读与内容增强选项 =====
+		mdx_update_option( 'mdx_posts_per_page', isset( $_POST['mdx_posts_per_page'] ) ? max( 0, (int) $_POST['mdx_posts_per_page'] ) : 0 );
+		mdx_update_option( 'mdx_home_exclude_cats', isset( $_POST['mdx_home_exclude_cats'] ) ? sanitize_text_field( wp_unslash( $_POST['mdx_home_exclude_cats'] ) ) : '' );
+		mdx_update_option( 'mdx_excerpt_length', isset( $_POST['mdx_excerpt_length'] ) ? max( 0, (int) $_POST['mdx_excerpt_length'] ) : 0 );
+		mdx_update_option( 'mdx_reading_meta', isset( $_POST['mdx_reading_meta'] ) ? sanitize_text_field( $_POST['mdx_reading_meta'] ) : 'false' );
+		mdx_update_option( 'mdx_license', isset( $_POST['mdx_license'] ) ? sanitize_key( $_POST['mdx_license'] ) : 'none' );
+		mdx_update_option( 'mdx_license_custom', isset( $_POST['mdx_license_custom'] ) ? wp_kses_post( wp_unslash( $_POST['mdx_license_custom'] ) ) : '' );
+		mdx_update_option( 'mdx_external_link_blank', isset( $_POST['mdx_external_link_blank'] ) ? sanitize_text_field( $_POST['mdx_external_link_blank'] ) : 'false' );
+		mdx_update_option( 'mdx_close_comments', isset( $_POST['mdx_close_comments'] ) ? sanitize_text_field( $_POST['mdx_close_comments'] ) : 'false' );
 		?>
         <div class="notice notice-success is-dismissible">
             <p><?php _e( '设置已保存。', 'mdx' ); ?></p>
@@ -104,14 +114,7 @@ wp_enqueue_media();
         </div>
 		<?php
 	} ?>
-	<?php if ( get_option( 'mdx_new_ver' ) != get_option( 'mdx_version' ) ) { ?>
-        <div class="notice notice-info is-dismissible">
-            <p><?php _e( 'MDx 已发布新版本 ', 'mdx' );
-				echo get_option( 'mdx_new_ver' );
-				_e( '。<a href="./admin.php?page=mdx_about">重新检查</a>', 'mdx' ); ?></p>
-        </div>
-	<?php }
-	if ( ! defined( 'ALU_VERSION' ) ) {
+	<?php if ( ! defined( 'ALU_VERSION' ) ) {
 		define( 'ALU_VERSION', '1.0.6' );
 	}
 	if ( ALU_VERSION !== '1.0.6' ) {
@@ -133,6 +136,7 @@ wp_enqueue_media();
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-seo"><?php _e( 'SEO', 'mdx' ); ?></a>
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-cdn"><?php _e( 'CDN', 'mdx' ); ?></a>
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-script"><?php _e( '脚本', 'mdx' ); ?></a>
+        <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-reading"><?php _e( '阅读增强', 'mdx' ); ?></a>
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-others"><?php _e( '杂项', 'mdx' ); ?></a>
     </nav>
     <form method="post" action="">
@@ -850,6 +854,101 @@ wp_enqueue_media();
                         <label><input type="radio" name="mdx_jquery" value="false" <?php if ( $mdx_v_jquery == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
                         </label><br>
                         <p class="description"><?php _e( '自 2.0.0 版本起，MDx 已不再依赖 jQuery 且不再在前端载入 jQuery 脚本。如果你在升级 MDx 后碰到页面显示不正常等问题，请尝试打开此选项。<br><strong>这是一个临时选项，将会在未来版本中被移除。如果你的前端页面中有依赖 jQuery 的其他资源，请确保其不受 MDx 移除 jQuery 的影响。</strong><br>有关更多从 MDx 1.x 升级至 2.x 的信息，请参阅<a href="https://doc.flyhigher.top/mdx/zh-CN/upgrade-tip/">主题文档</a>。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            </tbody>
+            <tbody class="mdx-admin-section" id="mdx-admin-nav-reading-section">
+            <tr>
+                <th scope="row"><label for="mdx_posts_per_page"><?php _e( '每页文章数', 'mdx' ); ?></label></th>
+                <td>
+                    <input name="mdx_posts_per_page" type="number" min="0" step="1" id="mdx_posts_per_page"
+                           value="<?php echo esc_attr( mdx_get_option( 'mdx_posts_per_page' ) ); ?>" class="small-text">
+                    <p class="description"><?php _e( '首页、分类、标签、搜索等文章列表每页显示的文章数量。填 <code>0</code> 则使用 WordPress「设置 → 阅读」中的默认值。', 'mdx' ); ?></p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="mdx_home_exclude_cats"><?php _e( '首页排除分类', 'mdx' ); ?></label></th>
+                <td>
+                    <input name="mdx_home_exclude_cats" type="text" id="mdx_home_exclude_cats"
+                           value="<?php echo esc_attr( mdx_get_option( 'mdx_home_exclude_cats' ) ); ?>" class="regular-text" placeholder="例如：3, 8">
+                    <p class="description"><?php _e( '填写分类 ID，多个 ID 用英文逗号分隔。这些分类下的文章不会出现在首页列表中（不影响分类页与搜索结果）。', 'mdx' ); ?></p>
+                    <?php
+                    $mdx_all_cats = get_categories( array( 'hide_empty' => false, 'number' => 100 ) );
+                    if ( ! empty( $mdx_all_cats ) ) {
+                        $mdx_cat_list = array();
+                        foreach ( $mdx_all_cats as $mdx_cat ) {
+                            $mdx_cat_list[] = $mdx_cat->term_id . '：' . $mdx_cat->name;
+                        }
+                        echo '<p class="description">' . esc_html__( '可用分类：', 'mdx' ) . esc_html( implode( '，', $mdx_cat_list ) ) . '</p>';
+                    }
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="mdx_excerpt_length"><?php _e( '摘要字数', 'mdx' ); ?></label></th>
+                <td>
+                    <input name="mdx_excerpt_length" type="number" min="0" step="10" id="mdx_excerpt_length"
+                           value="<?php echo esc_attr( mdx_get_option( 'mdx_excerpt_length' ) ); ?>" class="small-text">
+                    <p class="description"><?php _e( '文章列表摘要的最大字数。填 <code>0</code> 则沿用主题按不同布局预设的长度。', 'mdx' ); ?></p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( '字数与阅读时长', 'mdx' ); ?></th>
+                <td>
+                    <?php $mdx_v_reading_meta = mdx_get_option( 'mdx_reading_meta' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_reading_meta" value="true" <?php if ( $mdx_v_reading_meta == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_reading_meta" value="false" <?php if ( $mdx_v_reading_meta == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，文章正文末尾会显示全文字数与预计阅读时长（中文约 300 字/分钟，英文约 200 词/分钟）。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="mdx_license"><?php _e( '文章版权协议', 'mdx' ); ?></label></th>
+                <td>
+                    <?php $mdx_v_license = mdx_get_option( 'mdx_license' ); ?>
+                    <select name="mdx_license" id="mdx_license">
+                        <option value="none" <?php if ( $mdx_v_license == 'none' || $mdx_v_license == '' ){ ?>selected="selected"<?php } ?>><?php _e( '不显示', 'mdx' ); ?></option>
+                        <option value="cc-by" <?php if ( $mdx_v_license == 'cc-by' ){ ?>selected="selected"<?php } ?>>CC BY 4.0（署名）</option>
+                        <option value="cc-by-sa" <?php if ( $mdx_v_license == 'cc-by-sa' ){ ?>selected="selected"<?php } ?>>CC BY-SA 4.0（署名-相同方式共享）</option>
+                        <option value="cc-by-nd" <?php if ( $mdx_v_license == 'cc-by-nd' ){ ?>selected="selected"<?php } ?>>CC BY-ND 4.0（署名-禁止演绎）</option>
+                        <option value="cc-by-nc" <?php if ( $mdx_v_license == 'cc-by-nc' ){ ?>selected="selected"<?php } ?>>CC BY-NC 4.0（署名-非商业性使用）</option>
+                        <option value="cc-by-nc-sa" <?php if ( $mdx_v_license == 'cc-by-nc-sa' ){ ?>selected="selected"<?php } ?>>CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享）</option>
+                        <option value="cc-by-nc-nd" <?php if ( $mdx_v_license == 'cc-by-nc-nd' ){ ?>selected="selected"<?php } ?>>CC BY-NC-ND 4.0（署名-非商业性使用-禁止演绎）</option>
+                        <option value="cc0" <?php if ( $mdx_v_license == 'cc0' ){ ?>selected="selected"<?php } ?>>CC0 1.0（公共领域贡献）</option>
+                        <option value="custom" <?php if ( $mdx_v_license == 'custom' ){ ?>selected="selected"<?php } ?>><?php _e( '自定义文本', 'mdx' ); ?></option>
+                    </select>
+                    <p class="description"><?php _e( '选择后会在文章正文末尾显示版权声明，留空（不显示）则保持原样。', 'mdx' ); ?></p>
+                    <br>
+                    <textarea name="mdx_license_custom" id="mdx_license_custom" rows="5" cols="60" class="large-text" placeholder="<?php esc_attr_e( '仅在选择「自定义文本」时生效，支持基础 HTML。', 'mdx' ); ?>"><?php echo esc_textarea( mdx_get_option( 'mdx_license_custom' ) ); ?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( '外链在新窗口打开', 'mdx' ); ?></th>
+                <td>
+                    <?php $mdx_v_external_link_blank = mdx_get_option( 'mdx_external_link_blank' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_external_link_blank" value="true" <?php if ( $mdx_v_external_link_blank == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_external_link_blank" value="false" <?php if ( $mdx_v_external_link_blank == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，文章正文中指向其它站点的链接会自动加上 <code>target="_blank"</code> 与 <code>rel="noopener noreferrer"</code>。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( '关闭全站评论', 'mdx' ); ?></th>
+                <td>
+                    <?php $mdx_v_close_comments = mdx_get_option( 'mdx_close_comments' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_close_comments" value="true" <?php if ( $mdx_v_close_comments == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_close_comments" value="false" <?php if ( $mdx_v_close_comments == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，前端将隐藏评论列表与评论表单（不改动数据库中已有的评论，关闭后即可恢复显示）。', 'mdx' ); ?></p>
                     </fieldset>
                 </td>
             </tr>

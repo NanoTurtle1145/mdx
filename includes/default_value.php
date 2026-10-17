@@ -1,4 +1,21 @@
 <?php
+/**
+ * 主题默认选项。
+ *
+ * 注意：本文件可能在 WordPress 的 after_setup_theme 之前被载入，
+ * 此时调用 __('...') 会触发 WordPress 6.7+ 的
+ * "_load_textdomain_just_in_time was called incorrectly" 提示，
+ * 因此这里统一通过 mdx_default_text() 做安全翻译。
+ */
+if (!function_exists('mdx_default_text')) {
+    function mdx_default_text($text) {
+        if (function_exists('__') && (did_action('after_setup_theme') || doing_action('after_setup_theme') || did_action('init'))) {
+            return __($text, 'mdx');
+        }
+        return $text;
+    }
+}
+
 $mdx_default_values = array(
     'mdx_install' => 'normal',
     'mdx_night_style' => 'true',
@@ -12,7 +29,7 @@ $mdx_default_values = array(
     'mdx_img_box' => 'true',
     'mdx_img_box_show_alt' => 'true',
     'mdx_img_box_opacity' => 'false',
-    "mdx_readmore" => __('去围观','mdx'),
+    "mdx_readmore" => mdx_default_text('去围观'),
     "mdx_post_money" => '',
     'mdx_read_pro' => 'true',
     'mdx_pro_save' => 'true',
@@ -39,14 +56,14 @@ $mdx_default_values = array(
     'mdx_hot_posts_get' => 'cat',
     'mdx_hot_posts_num' => '10',
     'mdx_hot_posts_cat' => '',
-    'mdx_hot_posts_text' => __('推荐文章','mdx'),
-    'mdx_all_posts_text' => __('最新文章','mdx'),
+    'mdx_hot_posts_text' => mdx_default_text('推荐文章'),
+    'mdx_all_posts_text' => mdx_default_text('最新文章'),
     'mdx_you_may_like' => 'false',
     'mdx_you_may_like_num' => '5',
     'mdx_you_may_like_way' => 'tag',
-    'mdx_you_may_like_text' => __('推荐文章','mdx'),
+    'mdx_you_may_like_text' => mdx_default_text('推荐文章'),
     'mdx_real_search' => 'false',
-    'mdx_submit_comment' => __('发送','mdx'),
+    'mdx_submit_comment' => mdx_default_text('发送'),
     'mdx_comment_ajax' => 'true',
     'mdx_comment_emj' => 'true',
     'mdx_ad' => '',
@@ -113,6 +130,23 @@ $mdx_default_values = array(
     'mdx_footer_say' => 'Hello => MDx!',
     'mdx_footer' => '',
     'mdx_hide_footer' => 'false',
-    'mdx_friendly_links_style' => '0'
+    'mdx_friendly_links_style' => '0',
+
+    // ===== 以下为 2.1.0 新增的增强选项 =====
+    // 阅读与内容
+    'mdx_posts_per_page' => '0',
+    'mdx_home_exclude_cats' => '',
+    'mdx_excerpt_length' => '0',
+    'mdx_reading_meta' => 'false',
+    'mdx_license' => 'none',
+    'mdx_license_custom' => '',
+    'mdx_external_link_blank' => 'false',
+    'mdx_close_comments' => 'false',
+    // 外观与性能
+    'mdx_custom_css' => '',
+    'mdx_disable_emoji' => 'false',
+    'mdx_disable_embeds' => 'false',
+    'mdx_login_bg' => '',
+    'mdx_login_logo' => ''
 );
 ?>

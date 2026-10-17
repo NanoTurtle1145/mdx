@@ -124,6 +124,13 @@ wp_enqueue_script( 'wp-color-picker' );
 		}
 		mdx_update_option( 'mdx_footer', htmlentities( stripslashes( $_POST['mdx_footer'] ) ) );
         mdx_update_option( 'mdx_friendly_links_style', sanitize_text_field( $_POST['mdx_friendly_links_style'] ) );
+
+		// ===== 2.1.0 新增：外观与性能增强选项 =====
+		mdx_update_option( 'mdx_custom_css', isset( $_POST['mdx_custom_css'] ) ? mdx_sanitize_css( wp_unslash( $_POST['mdx_custom_css'] ) ) : '' );
+		mdx_update_option( 'mdx_disable_emoji', isset( $_POST['mdx_disable_emoji'] ) ? sanitize_text_field( $_POST['mdx_disable_emoji'] ) : 'false' );
+		mdx_update_option( 'mdx_disable_embeds', isset( $_POST['mdx_disable_embeds'] ) ? sanitize_text_field( $_POST['mdx_disable_embeds'] ) : 'false' );
+		mdx_update_option( 'mdx_login_bg', isset( $_POST['mdx_login_bg'] ) ? esc_url_raw( wp_unslash( $_POST['mdx_login_bg'] ) ) : '' );
+		mdx_update_option( 'mdx_login_logo', isset( $_POST['mdx_login_logo'] ) ? esc_url_raw( wp_unslash( $_POST['mdx_login_logo'] ) ) : '' );
 		?>
         <div class="notice notice-success is-dismissible">
             <p><?php _e( '设置已保存。', 'mdx' ); ?></p>
@@ -136,14 +143,7 @@ wp_enqueue_script( 'wp-color-picker' );
         </div>
 		<?php
 	} ?>
-	<?php if ( get_option( 'mdx_new_ver' ) != get_option( 'mdx_version' ) ) { ?>
-        <div class="notice notice-info is-dismissible">
-            <p><?php _e( 'MDx 已发布新版本 ', 'mdx' );
-				echo get_option( 'mdx_new_ver' );
-				_e( '。<a href="./admin.php?page=mdx_about">重新检查</a>', 'mdx' ); ?></p>
-        </div>
-	<?php }
-	if ( ! defined( 'ALU_VERSION' ) ) {
+	<?php if ( ! defined( 'ALU_VERSION' ) ) {
 		define( 'ALU_VERSION', '1.0.6' );
 	}
 	if ( ALU_VERSION !== '1.0.6' ) {
@@ -162,6 +162,7 @@ wp_enqueue_script( 'wp-color-picker' );
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-footer"><?php _e( '页脚', 'mdx' ); ?></a>
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-touch-bar-icon"><?php _e( 'Touch Bar 图标', 'mdx' ); ?></a>
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-friendly-links"><?php _e( '友情链接', 'mdx' ); ?></a>
+        <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-enhance"><?php _e( '外观增强', 'mdx' ); ?></a>
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-others"><?php _e( '杂项', 'mdx' ); ?></a>
     </nav>
     <form method="post" action="">
@@ -764,6 +765,58 @@ wp_enqueue_script( 'wp-color-picker' );
                         </label><br>
                         <p class="description"><?php _e( '开启后，标签云页面输出的标签会带有随机颜色，反之为同一颜色。', 'mdx' ); ?></p>
                     </fieldset>
+                </td>
+            </tr>
+            </tbody>
+            <tbody class="mdx-admin-section" id="mdx-admin-nav-enhance-section">
+            <tr>
+                <th scope="row"><label for="mdx_custom_css"><?php _e( '自定义 CSS', 'mdx' ); ?></label></th>
+                <td>
+                    <textarea name="mdx_custom_css" id="mdx_custom_css" rows="12" cols="70" class="large-text code"
+                              spellcheck="false" placeholder="/* 例如： article p { font-size: 17px; } */"><?php echo esc_textarea( mdx_get_option( 'mdx_custom_css' ) ); ?></textarea>
+                    <p class="description"><?php _e( '这里的 CSS 会在主题样式之后加载，可直接覆盖主题的默认样式。支持完整的 CSS 语法（不支持 <code>&lt;style&gt;</code> 标签与 PHP 代码）。', 'mdx' ); ?></p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( '禁用表情符号脚本', 'mdx' ); ?></th>
+                <td>
+                    <?php $mdx_v_disable_emoji = mdx_get_option( 'mdx_disable_emoji' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_disable_emoji" value="true" <?php if ( $mdx_v_disable_emoji == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_disable_emoji" value="false" <?php if ( $mdx_v_disable_emoji == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，将移除 WordPress 默认加载的 Emoji 检测脚本与样式，可略微减小页面体积。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( '禁用 oEmbed 嵌入脚本', 'mdx' ); ?></th>
+                <td>
+                    <?php $mdx_v_disable_embeds = mdx_get_option( 'mdx_disable_embeds' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_disable_embeds" value="true" <?php if ( $mdx_v_disable_embeds == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_disable_embeds" value="false" <?php if ( $mdx_v_disable_embeds == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，将移除 WordPress 的 oEmbed 发现链接与前端脚本，可减少一次前端请求。若你的文章中大量使用视频/推特等自动嵌入，请保持关闭。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="mdx_login_bg"><?php _e( '登录页背景图', 'mdx' ); ?></label></th>
+                <td>
+                    <input name="mdx_login_bg" type="text" id="mdx_login_bg"
+                           value="<?php echo esc_attr( mdx_get_option( 'mdx_login_bg' ) ); ?>" class="large-text" placeholder="https://example.com/bg.jpg">
+                    <p class="description"><?php _e( '填写图片地址，将作为 WordPress 登录页（wp-login.php）的全屏背景。留空则使用 WordPress 默认样式。建议使用 1920×1080 左右的图片。', 'mdx' ); ?></p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="mdx_login_logo"><?php _e( '登录页 Logo', 'mdx' ); ?></label></th>
+                <td>
+                    <input name="mdx_login_logo" type="text" id="mdx_login_logo"
+                           value="<?php echo esc_attr( mdx_get_option( 'mdx_login_logo' ) ); ?>" class="large-text" placeholder="https://example.com/logo.png">
+                    <p class="description"><?php _e( '填写图片地址，将替换登录页顶部的 WordPress Logo（点击后返回站点首页）。建议使用透明背景的 PNG 图片。', 'mdx' ); ?></p>
                 </td>
             </tr>
             </tbody>

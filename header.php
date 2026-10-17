@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //引用全局变量
 global $wp;
 global $files_root;

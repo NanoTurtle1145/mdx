@@ -1,2 +1,6 @@
-<?php //此文件内容会由构建工具自动生成
-if(get_option('mdx_version_commit')!='2.0.4.20a1c53'){update_option('mdx_version', '2.0.4');update_option('mdx_version_commit', '2.0.4.20a1c53');}?>
+<?php // 版本信息（由维护者手动更新）
+if (get_option('mdx_version_commit') !== '2.1.0.20261017') {
+    update_option('mdx_version', '2.1.0');
+    update_option('mdx_version_commit', '2.1.0.20261017');
+}
+?>
