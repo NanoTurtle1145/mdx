@@ -130,6 +130,10 @@ $mdx_default_values = array(
     'mdx_footer_say' => 'Hello => MDx!',
     'mdx_footer' => '',
     'mdx_hide_footer' => 'false',
+    'mdx_footer_credit_show' => 'true',
+    'mdx_footer_credit' => '',
+    'mdx_footer_links' => '',
+    'mdx_footer_extra' => '',
     'mdx_friendly_links_style' => '0',
 
     // ===== 以下为 2.1.0 新增的增强选项 =====

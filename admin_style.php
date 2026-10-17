@@ -123,6 +123,12 @@ wp_enqueue_script( 'wp-color-picker' );
 			mdx_update_option( 'mdx_footer_say', htmlentities( stripslashes( $_POST['mdx_footer_say'] ) ) );
 		}
 		mdx_update_option( 'mdx_footer', htmlentities( stripslashes( $_POST['mdx_footer'] ) ) );
+
+		// ===== 页脚自定义（署名 / 快捷链接 / 附加内容）=====
+		mdx_update_option( 'mdx_footer_credit_show', isset( $_POST['mdx_footer_credit_show'] ) ? sanitize_text_field( $_POST['mdx_footer_credit_show'] ) : 'true' );
+		mdx_update_option( 'mdx_footer_credit', isset( $_POST['mdx_footer_credit'] ) ? htmlentities( stripslashes( wp_unslash( $_POST['mdx_footer_credit'] ) ) ) : '' );
+		mdx_update_option( 'mdx_footer_links', isset( $_POST['mdx_footer_links'] ) ? sanitize_textarea_field( wp_unslash( $_POST['mdx_footer_links'] ) ) : '' );
+		mdx_update_option( 'mdx_footer_extra', isset( $_POST['mdx_footer_extra'] ) ? htmlentities( stripslashes( wp_unslash( $_POST['mdx_footer_extra'] ) ) ) : '' );
         mdx_update_option( 'mdx_friendly_links_style', sanitize_text_field( $_POST['mdx_friendly_links_style'] ) );
 
 		// ===== 2.1.0 新增：外观与性能增强选项 =====
@@ -693,6 +699,40 @@ wp_enqueue_script( 'wp-color-picker' );
                 <td>
                     <textarea name="mdx_footer" id="mdx_footer" rows="7" cols="50"><?php echo mdx_get_option( 'mdx_footer' ) ?></textarea><br><a class="thickbox button" title="<?php _e( '社交网站图标编辑器', 'mdx' ); ?>" href="#TB_inline?height=100%&width=100%&inlineId=social-network-editor" style="margin-top: 5px;"><?php _e( '社交网站图标编辑器', 'mdx' ); ?></a>
                     <p class="description"><?php _e( '在这里编辑页脚内容。支持 <code>HTML</code> 格式。', 'mdx' ); ?></p></td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( '显示主题署名', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_footer_credit_show = mdx_get_option( 'mdx_footer_credit_show' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_footer_credit_show" value="true" <?php if ( $mdx_v_footer_credit_show == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_footer_credit_show" value="false" <?php if ( $mdx_v_footer_credit_show == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '控制页脚底部「Theme: MDx By AxtonYao」这一行的显示；关闭后整行隐藏（但仍会保留主题许可证信息）。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="mdx_footer_credit"><?php _e( '页脚署名文本', 'mdx' ); ?></label></th>
+                <td>
+                    <textarea name="mdx_footer_credit" id="mdx_footer_credit" rows="4" cols="60"><?php echo esc_textarea( htmlspecialchars_decode( mdx_get_option( 'mdx_footer_credit' ) ) ); ?></textarea>
+                    <p class="description"><?php _e( '自定义「Theme: MDx By AxtonYao」这一行的内容，支持 <code>HTML</code>。留空则使用默认内容。可用占位符：<code>{year}</code> 当前年份、<code>{site}</code> 站点名称、<code>{theme}</code> 主题名。', 'mdx' ); ?></p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="mdx_footer_links"><?php _e( '页脚快捷链接', 'mdx' ); ?></label></th>
+                <td>
+                    <textarea name="mdx_footer_links" id="mdx_footer_links" rows="5" cols="60" placeholder="关于|/about/&#10;RSS|/feed/&#10;GitHub|https://github.com/"><?php echo esc_textarea( htmlspecialchars_decode( mdx_get_option( 'mdx_footer_links' ) ) ); ?></textarea>
+                    <p class="description"><?php _e( '每行一条，格式为 <code>文字|链接</code>（只写文字则显示为普通文本）。会显示在页脚署名附近，适合放关于、RSS、GitHub 等入口。', 'mdx' ); ?></p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="mdx_footer_extra"><?php _e( '页脚附加内容', 'mdx' ); ?></label></th>
+                <td>
+                    <textarea name="mdx_footer_extra" id="mdx_footer_extra" rows="6" cols="60" placeholder="&lt;p&gt;本站使用 CDN 加速 / 由某某提供支持&lt;/p&gt;"><?php echo esc_textarea( htmlspecialchars_decode( mdx_get_option( 'mdx_footer_extra' ) ) ); ?></textarea>
+                    <p class="description"><?php _e( '显示在页脚署名下方的附加内容，支持 <code>HTML</code>，可用于放置赞助、致谢、友链图标等。留空则不显示。', 'mdx' ); ?></p>
+                </td>
             </tr>
             </tbody>
 

@@ -329,6 +329,14 @@ body.mdui-theme-layout-dark .mdx-search-empty-title {
 .mdx-license-sep{opacity:.45;}
 .mdui-theme-layout-dark .mdx-reading-meta{color:hsla(0,0%,100%,.54);}
 .mdui-theme-layout-dark .mdx-license{background:hsla(0,0%,100%,.07);color:hsla(0,0%,100%,.6);}
+/* 页脚自定义：快捷链接 / 附加内容 */
+.mdx-footer-links{margin-top:8px;font-size:13px;line-height:1.9;opacity:.85;}
+.mdx-footer-links a{text-decoration:none;transition:opacity .2s;}
+.mdx-footer-links a:hover{opacity:.7;text-decoration:underline;}
+.mdx-footer-links-sep{margin:0 8px;opacity:.5;}
+.mdx-footer-extra{margin-top:10px;font-size:13px;line-height:1.8;opacity:.9;}
+.mdx-footer-extra img{max-width:100%;height:auto;vertical-align:middle;}
+.mdx-footer-extra p{margin:4px 0;}
 ';
 
     $custom_css = mdx_sanitize_css(mdx_get_option('mdx_custom_css'));
@@ -339,6 +347,94 @@ body.mdui-theme-layout-dark .mdx-search-empty-title {
     wp_add_inline_style('mdx_style_css', $css);
 }
 add_action('wp_enqueue_scripts', 'mdx_extra_inline_css', 30);
+
+
+/* ==========================================================================
+ * 11. 页脚自定义：署名 / 快捷链接 / 附加内容
+ * ========================================================================== */
+
+/**
+ * 页脚主题署名（可后台自定义，支持 {year} {site} {theme} 占位符）。
+ *
+ * @return string
+ */
+function mdx_footer_credit_html() {
+    if (!mdx_option_true('mdx_footer_credit_show')) {
+        return '';
+    }
+    if ((string) mdx_get_option('mdx_hide_footer') === 'true') {
+        return '';
+    }
+
+    $credit = (string) mdx_get_option('mdx_footer_credit');
+    $credit = htmlspecialchars_decode($credit);
+    if (trim($credit) === '') {
+        $credit = 'Theme: MDx By <a href="https://flyhigher.top" target="_blank" rel="noopener" class="click">AxtonYao</a>';
+    }
+
+    $credit = strtr($credit, array(
+        '{year}'  => esc_html(date_i18n('Y')),
+        '{site}'  => esc_html(get_bloginfo('name')),
+        '{theme}' => 'MDx',
+    ));
+
+    return wp_kses_post($credit);
+}
+
+/**
+ * 页脚快捷链接。每行一条，格式：文字|链接。
+ *
+ * @return string
+ */
+function mdx_footer_links_html() {
+    $raw = (string) mdx_get_option('mdx_footer_links');
+    $raw = trim(htmlspecialchars_decode($raw));
+    if ($raw === '') {
+        return '';
+    }
+
+    $items = array();
+    foreach (preg_split('/\r\n|\r|\n/', $raw) as $line) {
+        $line = trim($line);
+        if ($line === '') {
+            continue;
+        }
+        if (strpos($line, '|') !== false) {
+            list($label, $url) = array_map('trim', explode('|', $line, 2));
+        } else {
+            $label = $line;
+            $url   = '';
+        }
+        if ($label === '') {
+            continue;
+        }
+        if ($url !== '') {
+            $target = preg_match('#^https?://#i', $url) ? ' target="_blank" rel="noopener noreferrer"' : '';
+            $items[] = '<a href="' . esc_url($url) . '"' . $target . '>' . esc_html($label) . '</a>';
+        } else {
+            $items[] = '<span>' . esc_html($label) . '</span>';
+        }
+    }
+
+    if (empty($items)) {
+        return '';
+    }
+
+    return '<div class="mdx-footer-links">' . implode('<span class="mdx-footer-links-sep">·</span>', $items) . '</div>';
+}
+
+/**
+ * 页脚附加内容（支持 HTML）。
+ *
+ * @return string
+ */
+function mdx_footer_extra_html() {
+    $extra = (string) mdx_get_option('mdx_footer_extra');
+    if (trim($extra) === '') {
+        return '';
+    }
+    return '<div class="mdx-footer-extra mdui-typo">' . wp_kses_post(htmlspecialchars_decode($extra)) . '</div>';
+}
 
 /* ==========================================================================
  * 6. 禁用 WordPress 表情符号脚本（性能优化选项）
