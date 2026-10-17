@@ -406,6 +406,17 @@ html.mdx-md3 .PostMain2 .mdx-clean-footer {
     color: rgb(var(--mdui-color-on-surface)) !important;
     border-radius: var(--mdui-shape-corner-large) !important;
     box-shadow: var(--mdui-elevation-level1) !important;
+    /* 建立 BFC，避免 article 的上下外边距与卡片合并，导致文字贴住卡片边缘 */
+    overflow: hidden;
+}
+
+/* 容器内边距：MD3 卡片式正文左右留白，避免文字贴边 */
+html.mdx-md3 .ArtMain > article,
+html.mdx-md3 .ArtMain0 > article,
+html.mdx-md3 .mdx-clean-footer > article {
+    margin-left: 24px !important;
+    margin-right: 24px !important;
+    box-sizing: border-box;
 }
 html.mdx-md3 .PostMain,
 html.mdx-md3 .PostMain2,
@@ -747,6 +758,11 @@ html.mdx-md3 body.mdui-theme-layout-dark #respond {
     html.mdx-md3 .ArtMain0,
     html.mdx-md3 .PostMain .mdx-clean-footer {
         border-radius: var(--mdui-shape-corner-medium) !important;
+    }
+    html.mdx-md3 .ArtMain > article,
+    html.mdx-md3 .ArtMain0 > article {
+        margin-left: 16px !important;
+        margin-right: 16px !important;
     }
 }
 
