@@ -727,7 +727,13 @@ html.mdx-md3 .PostTitleFillPage,
 html.mdx-md3 .PostTitleFillBack2,
 html.mdx-md3 .PostTitleFillPageBackGround,
 html.mdx-md3 .mdx-index-img-bg {
-    background-color: rgb(var(--mdui-color-primary)) !important;
+    background-color: rgb(var(--mdui-color-primary-container)) !important;
+}
+/* 只对纯色填充层移除背景图，避免覆盖特色图片 */
+html.mdx-md3 .PostTitleFill,
+html.mdx-md3 .PostTitleFillBack2,
+html.mdx-md3 .PostTitleFillPageBackGround,
+html.mdx-md3 .mdx-index-img-bg {
     background-image: none !important;
 }
 
@@ -1291,12 +1297,17 @@ html.mdx-md3 body.mdui-theme-layout-dark .PostTitleFillPage,
 html.mdx-md3 body.mdui-theme-layout-dark .PostTitleFillBack2,
 html.mdx-md3 body.mdui-theme-layout-dark .PostTitleFillPageBackGround,
 html.mdx-md3 body.mdui-theme-layout-dark .theFirstPageBackGround {
-    background-color: rgb(var(--mdui-color-primary)) !important;
+    background-color: rgb(var(--mdui-color-primary-container)) !important;
+}
+html.mdx-md3 body.mdui-theme-layout-dark .PostTitleFill,
+html.mdx-md3 body.mdui-theme-layout-dark .PostTitleFillBack2,
+html.mdx-md3 body.mdui-theme-layout-dark .PostTitleFillPageBackGround {
     background-image: none !important;
 }
-html.mdx-md3 body.mdui-theme-layout-dark .theFirstPageSay,
-html.mdx-md3 body.mdui-theme-layout-dark .theFirstPageSay * {
-    color: rgb(var(--mdui-color-on-primary)) !important;
+/* 深色模式下首页大图叠加暗色遮罩，保持白色文字可读 */
+html.mdx-md3 body.mdui-theme-layout-dark .mdx-index-img-bg {
+    background-color: rgba(var(--mdui-color-scrim), 0.4) !important;
+    background-image: none !important;
 }
 html.mdx-md3 body.mdui-theme-layout-dark .mdx-clean-footer,
 html.mdx-md3 body.mdui-theme-layout-dark .mdx-copy-footer {
