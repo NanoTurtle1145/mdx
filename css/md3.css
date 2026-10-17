@@ -299,6 +299,13 @@ html.mdx-md3 .mdui-fab:hover {
 html.mdx-md3 .mdui-fab i {
     color: inherit !important;
 }
+/* 回到顶部按钮：圆形以贴合主题内置的环形阅读进度 */
+html.mdx-md3 .scrollToTop {
+    border-radius: 50% !important;
+}
+html.mdx-md3 #indic {
+    opacity: 1;
+}
 
 /* ==========================================================================
  * 5. 卡片 / 文章列表（只处理卡片容器，不处理其中的 Banner 图）
@@ -406,8 +413,15 @@ html.mdx-md3 .PostMain2 .mdx-clean-footer {
     color: rgb(var(--mdui-color-on-surface)) !important;
     border-radius: var(--mdui-shape-corner-large) !important;
     box-shadow: var(--mdui-elevation-level1) !important;
-    /* 建立 BFC，避免 article 的上下外边距与卡片合并，导致文字贴住卡片边缘 */
-    overflow: hidden;
+    /* 建立 BFC，避免 article 的上下外边距与卡片合并；不使用 overflow:hidden，
+       否则会把卡片左侧悬浮的分享按钮裁掉（主题里有 display:block!important，需一并覆盖） */
+    display: flow-root !important;
+    overflow: visible !important;
+}
+
+/* 文章特色图与卡片顶部圆角贴合 */
+html.mdx-md3 .PostMainImg0 {
+    border-radius: var(--mdui-shape-corner-large) var(--mdui-shape-corner-large) 0 0 !important;
 }
 
 /* 容器内边距：MD3 卡片式正文左右留白，避免文字贴边 */

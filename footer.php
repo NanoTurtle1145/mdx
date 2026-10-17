@@ -211,14 +211,22 @@
         <?php if (mdx_get_option("mdx_read_pro") === "true") { ?>
         //Show Read Pro'
         if (document.getElementById('indic')) {
+            // MD3 模式：使用 MD3 语义色，让环形进度在浅色/深色下都清晰可见
+            var mdx_md3_ring_color = function (name, fallback) {
+                if (!document.documentElement.classList.contains('mdx-md3')) {
+                    return fallback;
+                }
+                var value = getComputedStyle(document.body).getPropertyValue(name).trim();
+                return value ? 'rgb(' + value + ')' : fallback;
+            };
             ind = radialIndicator("#indic", {
                 displayNumber: false,
                 radius: 26.5,
-                barColor: '#ffffff',
+                barColor: mdx_md3_ring_color('--mdui-color-on-primary-container', '#ffffff'),
                 roundCorner: false,
                 barWidth: 3,
                 precision: 3,
-                barBgColor: '<?php echo $mdx_style_act_hex;?>',
+                barBgColor: mdx_md3_ring_color('--mdui-color-primary', '<?php echo $mdx_style_act_hex;?>'),
             });
         }
         <?php } ?>
