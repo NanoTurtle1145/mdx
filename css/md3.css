@@ -141,50 +141,34 @@ html.mdx-md3 a {
 }
 
 /* ==========================================================================
- * 2. 顶部应用栏
+ * 2. 顶部应用栏（不改变主题原有的透明/主题色行为，只处理字号与图标）
  * ========================================================================== */
-html.mdx-md3 .titleBarGobal,
-html.mdx-md3 #titleBar,
-html.mdx-md3 #titleBarinPost,
-html.mdx-md3 #SearchBar {
-    background-color: rgba(var(--mdui-color-surface), 0.92) !important;
-    -webkit-backdrop-filter: saturate(180%) blur(18px);
-    backdrop-filter: saturate(180%) blur(18px);
-    box-shadow: none !important;
-    color: rgb(var(--mdui-color-on-surface)) !important;
-    border-bottom: 1px solid rgba(var(--mdui-color-outline-variant), 0.0);
-    transition: background-color var(--mdui-motion-duration-short4) var(--mdui-motion-easing-standard),
-        box-shadow var(--mdui-motion-duration-short4) var(--mdui-motion-easing-standard);
-}
-html.mdx-md3 .titleBarGobal.mdui-shadow-2,
-html.mdx-md3 #titleBar.mdui-shadow-2,
-html.mdx-md3 #titleBarinPost.mdui-shadow-2 {
-    box-shadow: var(--mdui-elevation-level2) !important;
-}
-html.mdx-md3 .titleBarGobal .mdui-toolbar,
-html.mdx-md3 #titleBarinPost .mdui-toolbar,
-html.mdx-md3 #SearchBar .mdui-toolbar {
-    background-color: transparent !important;
-}
-html.mdx-md3 .titleBarGobal .mdui-toolbar *,
-html.mdx-md3 #titleBarinPost .mdui-toolbar *,
-html.mdx-md3 #SearchBar .mdui-toolbar * {
-    color: rgb(var(--mdui-color-on-surface)) !important;
-}
 html.mdx-md3 .titleBarGobal .mdx-logo,
 html.mdx-md3 .titleBarGobal .mdui-typo-headline {
     font-size: var(--mdui-typescale-title-large-size) !important;
     line-height: var(--mdui-typescale-title-large-line-height) !important;
     font-weight: 500 !important;
     letter-spacing: 0 !important;
+    color: inherit !important;
 }
 
-/* 全屏搜索 */
-html.mdx-md3 #SearchBar {
-    background-color: rgb(var(--mdui-color-surface)) !important;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
+/* 顶栏内的图标按钮沿用主题的文字颜色（透明样式 + 白字或主题色底 + 白字） */
+html.mdx-md3 .titleBarGobal .mdui-btn-icon,
+html.mdx-md3 #titleBar .mdui-btn-icon,
+html.mdx-md3 #titleBarinPost .mdui-btn-icon,
+html.mdx-md3 #SearchBar .mdui-btn-icon {
+    color: inherit !important;
+    background-color: transparent !important;
+    transition: background-color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard);
 }
+html.mdx-md3 .titleBarGobal .mdui-btn-icon:hover,
+html.mdx-md3 #titleBar .mdui-btn-icon:hover,
+html.mdx-md3 #titleBarinPost .mdui-btn-icon:hover,
+html.mdx-md3 #SearchBar .mdui-btn-icon:hover {
+    background-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* 全屏搜索：保留主题的遮罩与配色，只把输入框做成 MD3 圆角搜索框 */
 html.mdx-md3 .outOfSearch {
     background-color: rgb(var(--mdui-color-surface-container-high)) !important;
     border-radius: var(--mdui-shape-corner-full) !important;
@@ -360,6 +344,21 @@ html.mdx-md3 .mdx-postlist-simple .card-text {
     color: rgb(var(--mdui-color-on-surface-variant)) !important;
     font-size: var(--mdui-typescale-body-medium-size) !important;
     line-height: 1.65 !important;
+}
+
+/* 图片覆盖式卡片：文字叠在深色图片上，必须保持白色，不能套用 on-surface 深色 */
+html.mdx-md3 .mdui-card-media-covered,
+html.mdx-md3 .mdui-card-media-covered a,
+html.mdx-md3 .mdui-card-media-covered .mdui-card-primary-title,
+html.mdx-md3 .mdui-card-media-covered .mdui-card-primary-subtitle {
+    color: #fff !important;
+}
+html.mdx-md3 .mdui-card-media-covered .mdui-card-primary-subtitle,
+html.mdx-md3 .mdui-card-media-covered .ct1-p {
+    color: rgba(255, 255, 255, 0.78) !important;
+}
+html.mdx-md3 .mdui-card-media-covered .mdui-card-primary-title {
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 html.mdx-md3 .coun-read {
     color: rgb(var(--mdui-color-primary)) !important;
@@ -716,16 +715,6 @@ html.mdx-md3 body.mdui-theme-layout-dark .mdui-drawer,
 html.mdx-md3 body.mdui-theme-layout-dark #left-drawer,
 html.mdx-md3 body.mdui-theme-layout-dark #mdx-right-drawer {
     background-color: rgb(var(--mdui-color-surface-container-low)) !important;
-}
-html.mdx-md3 body.mdui-theme-layout-dark .titleBarGobal,
-html.mdx-md3 body.mdui-theme-layout-dark #titleBar,
-html.mdx-md3 body.mdui-theme-layout-dark #titleBarinPost {
-    background-color: rgba(var(--mdui-color-surface), 0.92) !important;
-    color: rgb(var(--mdui-color-on-surface)) !important;
-}
-html.mdx-md3 body.mdui-theme-layout-dark .titleBarGobal .mdui-toolbar *,
-html.mdx-md3 body.mdui-theme-layout-dark #titleBarinPost .mdui-toolbar * {
-    color: rgb(var(--mdui-color-on-surface)) !important;
 }
 html.mdx-md3 body.mdui-theme-layout-dark .mdui-card,
 html.mdx-md3 body.mdui-theme-layout-dark .post-item,
