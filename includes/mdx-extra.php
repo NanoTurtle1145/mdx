@@ -414,75 +414,11 @@ function mdx_md3_html_class($output) {
     }
 
     $classes = array('mdx-md3');
-
-    $round = (string) mdx_get_option('mdx_md3_round');
-    if ($round === 'small' || $round === 'large') {
-        $classes[] = 'mdx-md3-round-' . $round;
-    }
-
-    if ((string) mdx_get_option('mdx_md3_reading_font') === 'serif') {
-        $classes[] = 'mdx-md3-reading-serif';
-    }
-
-    if (!mdx_option_true('mdx_md3_tonal')) {
-        $classes[] = 'mdx-md3-flat';
+    if (mdx_option_true('mdx_md3_font')) {
+        $classes[] = 'mdx-md3-font';
     }
 
     return $output . ' class="' . implode(' ', $classes) . '"';
 }
 add_filter('language_attributes', 'mdx_md3_html_class');
 
-/**
- * 输出 MD3 的运行时变量覆盖（OLED 纯黑表面、无色调表面等）。
- *
- * @param string $handle 样式句柄。
- * @return void
- */
-function mdx_md3_inline_css($handle = 'mdx_md3_css') {
-    if (!mdx_md3_enabled()) {
-        return;
-    }
-
-    $css = '';
-
-    // OLED：深色模式下把表面压到纯黑附近
-    if ((string) mdx_get_option('mdx_styles_dark') === 'oled' || (string) mdx_get_option('mdx_night_style') === 'oled') {
-        $css .= 'html.mdx-md3 body.mdui-theme-layout-dark{'
-            . '--mdui-color-surface:0,0,0;'
-            . '--mdui-color-background:0,0,0;'
-            . '--mdui-color-surface-dim:0,0,0;'
-            . '--mdui-color-surface-container-lowest:0,0,0;'
-            . '--mdui-color-surface-container-low:6,6,6;'
-            . '--mdui-color-surface-container:10,10,10;'
-            . '--mdui-color-surface-container-high:14,14,14;'
-            . '--mdui-color-surface-container-highest:18,18,18;}';
-    }
-
-    // 关闭「色调表面」：MD3 的表面色不带主色色调，回到中性灰白
-    if (!mdx_option_true('mdx_md3_tonal')) {
-        $css .= 'html.mdx-md3 body{'
-            . '--mdui-color-surface:250,250,250;'
-            . '--mdui-color-background:250,250,250;'
-            . '--mdui-color-surface-bright:255,255,255;'
-            . '--mdui-color-surface-container-lowest:255,255,255;'
-            . '--mdui-color-surface-container-low:255,255,255;'
-            . '--mdui-color-surface-container:245,245,245;'
-            . '--mdui-color-surface-container-high:238,238,238;'
-            . '--mdui-color-surface-container-highest:232,232,232;'
-            . '--mdui-color-surface-variant:236,236,236;}'
-            . 'html.mdx-md3 body.mdui-theme-layout-dark{'
-            . '--mdui-color-surface:18,18,18;'
-            . '--mdui-color-background:18,18,18;'
-            . '--mdui-color-surface-bright:30,30,30;'
-            . '--mdui-color-surface-container-lowest:0,0,0;'
-            . '--mdui-color-surface-container-low:24,24,24;'
-            . '--mdui-color-surface-container:30,30,30;'
-            . '--mdui-color-surface-container-high:36,36,36;'
-            . '--mdui-color-surface-container-highest:42,42,42;'
-            . '--mdui-color-surface-variant:44,44,44;}';
-    }
-
-    if ($css !== '') {
-        wp_add_inline_style($handle, $css);
-    }
-}

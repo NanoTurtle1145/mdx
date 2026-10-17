@@ -149,9 +149,7 @@ $mdx_default_values = array(
     'mdx_login_bg' => '',
     'mdx_login_logo' => '',
     // ===== MD3（Material Design 3）=====
-    'mdx_md3' => 'true',
-    'mdx_md3_round' => 'default',
-    'mdx_md3_reading_font' => 'sans',
-    'mdx_md3_tonal' => 'true'
+    'mdx_md3' => 'false',
+    'mdx_md3_font' => 'false'
 );
 ?>

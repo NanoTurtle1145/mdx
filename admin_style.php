@@ -134,9 +134,15 @@ wp_enqueue_script( 'wp-color-picker' );
 
 		// ===== MD3（Material Design 3）=====
 		mdx_update_option( 'mdx_md3', isset( $_POST['mdx_md3'] ) ? sanitize_text_field( $_POST['mdx_md3'] ) : 'false' );
-		mdx_update_option( 'mdx_md3_round', isset( $_POST['mdx_md3_round'] ) ? sanitize_key( $_POST['mdx_md3_round'] ) : 'default' );
-		mdx_update_option( 'mdx_md3_reading_font', isset( $_POST['mdx_md3_reading_font'] ) ? sanitize_key( $_POST['mdx_md3_reading_font'] ) : 'sans' );
-		mdx_update_option( 'mdx_md3_tonal', isset( $_POST['mdx_md3_tonal'] ) ? sanitize_text_field( $_POST['mdx_md3_tonal'] ) : 'true' );
+		mdx_update_option( 'mdx_md3_font', isset( $_POST['mdx_md3_font'] ) ? sanitize_text_field( $_POST['mdx_md3_font'] ) : 'false' );
+		// MD2 与 MD3 互斥：启用其中一个时关闭另一个
+		if ( mdx_get_option( 'mdx_md3' ) === 'true' ) {
+			mdx_update_option( 'mdx_md2', 'false' );
+			mdx_update_option( 'mdx_md2_font', 'false' );
+		} elseif ( mdx_get_option( 'mdx_md2' ) === 'true' ) {
+			mdx_update_option( 'mdx_md3', 'false' );
+			mdx_update_option( 'mdx_md3_font', 'false' );
+		}
 		?>
         <div class="notice notice-success is-dismissible">
             <p><?php _e( '设置已保存。', 'mdx' ); ?></p>
@@ -160,7 +166,6 @@ wp_enqueue_script( 'wp-color-picker' );
 	<?php } ?>
     <nav class="nav-tab-wrapper wp-clearfix" aria-label="Secondary menu">
         <a href="#" class="nav-tab nav-tab-active mdx-admin-nav" id="mdx-admin-nav-global"><?php _e( '全局', 'mdx' ); ?></a>
-        <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-md3">MD3</a>
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-index"><?php _e( '首页', 'mdx' ); ?></a>
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-post"><?php _e( '文章页', 'mdx' ); ?></a>
         <a href="#" class="nav-tab mdx-admin-nav" id="mdx-admin-nav-post-list"><?php _e( '文章列表', 'mdx' ); ?></a>
@@ -276,6 +281,32 @@ wp_enqueue_script( 'wp-color-picker' );
                 </td>
             </tr>
             <tr>
+                <th scope="row"><?php _e( 'Material Design 3', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_md3 = mdx_get_option( 'mdx_md3' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_md3" value="true" <?php if ( $mdx_v_md3 == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_md3" value="false" <?php if ( $mdx_v_md3 == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，主题将会使用 Material Design 3 风格。与 Material Design 2 互斥，启用两者时会以最后保存的为准。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( 'Material Design 3 字体', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_md3_font = mdx_get_option( 'mdx_md3_font' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_md3_font" value="true" <?php if ( $mdx_v_md3_font == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_md3_font" value="false" <?php if ( $mdx_v_md3_font == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，部分标题文字将会使用 Material Design 3 风格字体（Roboto）显示。<strong>请注意该字体仅包含拉丁字符。</strong>', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row"><?php _e( '移动 Chrome 标题栏颜色', 'mdx' ); ?></th>
                 <td>
 					<?php $mdx_v_chrome_color = mdx_get_option( 'mdx_chrome_color' ); ?>
@@ -312,57 +343,6 @@ wp_enqueue_script( 'wp-color-picker' );
             </tr>
             </tbody>
 
-            <tbody class="mdx-admin-section" id="mdx-admin-nav-md3-section">
-            <tr>
-                <th scope="row"><?php _e( 'MD3 外观', 'mdx' ); ?></th>
-                <td>
-                    <?php $mdx_v_md3 = mdx_get_option( 'mdx_md3' ); ?>
-                    <fieldset>
-                        <label><input type="radio" name="mdx_md3" value="true" <?php if ( $mdx_v_md3 == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
-                        </label><br>
-                        <label><input type="radio" name="mdx_md3" value="false" <?php if ( $mdx_v_md3 == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
-                        </label><br>
-                        <p class="description"><?php _e( '开启后，主题会加载基于 <a href="https://www.mdui.org/zh-cn/" target="_blank" rel="noopener">mdui.org</a> Material Design 3 设计令牌的视觉层：动态配色、色调表面、圆角卡片、MD3 按钮 / FAB / 抽屉 / 顶部应用栏等。关闭则回到原来的 MD2 风格。', 'mdx' ); ?></p>
-                    </fieldset>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="mdx_md3_round"><?php _e( 'MD3 圆角风格', 'mdx' ); ?></label></th>
-                <td>
-                    <?php $mdx_v_md3_round = mdx_get_option( 'mdx_md3_round' ); ?>
-                    <select name="mdx_md3_round" id="mdx_md3_round">
-                        <option value="small" <?php if ( $mdx_v_md3_round == 'small' ){ ?>selected="selected"<?php } ?>><?php _e( '较小（8 / 12 / 20px）', 'mdx' ); ?></option>
-                        <option value="default" <?php if ( $mdx_v_md3_round == 'default' || $mdx_v_md3_round == '' ){ ?>selected="selected"<?php } ?>><?php _e( '默认（MD3 规范：4 / 12 / 16 / 28px）', 'mdx' ); ?></option>
-                        <option value="large" <?php if ( $mdx_v_md3_round == 'large' ){ ?>selected="selected"<?php } ?>><?php _e( '较大（16 / 20 / 32px）', 'mdx' ); ?></option>
-                    </select>
-                    <p class="description"><?php _e( '控制卡片、对话框、按钮、抽屉等组件的圆角大小。', 'mdx' ); ?></p>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="mdx_md3_reading_font"><?php _e( '正文阅读字体', 'mdx' ); ?></label></th>
-                <td>
-                    <?php $mdx_v_md3_font = mdx_get_option( 'mdx_md3_reading_font' ); ?>
-                    <select name="mdx_md3_reading_font" id="mdx_md3_reading_font">
-                        <option value="sans" <?php if ( $mdx_v_md3_font == 'sans' || $mdx_v_md3_font == '' ){ ?>selected="selected"<?php } ?>><?php _e( '无衬线（MD3 默认）', 'mdx' ); ?></option>
-                        <option value="serif" <?php if ( $mdx_v_md3_font == 'serif' ){ ?>selected="selected"<?php } ?>><?php _e( '衬线（长文阅读）', 'mdx' ); ?></option>
-                    </select>
-                    <p class="description"><?php _e( '仅影响文章正文的阅读字体，界面文字仍使用无衬线字体。', 'mdx' ); ?></p>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><?php _e( '色调表面（Tonal Surface）', 'mdx' ); ?></th>
-                <td>
-                    <?php $mdx_v_md3_tonal = mdx_get_option( 'mdx_md3_tonal' ); ?>
-                    <fieldset>
-                        <label><input type="radio" name="mdx_md3_tonal" value="true" <?php if ( $mdx_v_md3_tonal == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
-                        </label><br>
-                        <label><input type="radio" name="mdx_md3_tonal" value="false" <?php if ( $mdx_v_md3_tonal == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
-                        </label><br>
-                        <p class="description"><?php _e( '开启时，背景与卡片会带有一点点主题色色调（Material You 的典型观感）；关闭则使用中性灰白表面。', 'mdx' ); ?></p>
-                    </fieldset>
-                </td>
-            </tr>
-            </tbody>
             <tbody class="mdx-admin-section" id="mdx-admin-nav-index-section">
             <tr>
                 <th scope="row"><label for="mdx_index_show"><?php _e( '首页样式', 'mdx' ); ?></label></th>
