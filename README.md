@@ -7,7 +7,11 @@
 >
 > - MD3 完整风格重构说明见 **[CHANGELOG-2.3.0.md](CHANGELOG-2.3.0.md)**
 > - 历史版本：**[CHANGELOG-2.2.1.md](CHANGELOG-2.2.1.md)**、**[CHANGELOG-2.2.0.md](CHANGELOG-2.2.0.md)**
-> - 2.1.0 兼容性修复与新增选项见 **[CHANGELOG-2.1.0.md](CHANGELOG-2.1.0.md)**
+> - 2.1.0 兼容性修复与新增选项见 **[CHANGELOG-2.1.0.md](CHANGELOG-2.1.0.md)**,
+> **维护 Fork**：本仓库由 [@NanoTurtle1145](https://github.com/NanoTurtle1145) 维护，
+> 上游为 [yrccondor/mdx](https://github.com/yrccondor/mdx)（作者 AxtonYao，GPLv3）。
+> 版本发布见 [Releases](https://github.com/NanoTurtle1145/mdx/releases)，
+> 维护流程、分支约定与发布步骤见 **[MAINTAINING.md](MAINTAINING.md)**。
 
 <br>
 
@@ -20,7 +24,7 @@
 > Looks light, power inside.
 
 <p align="center">
-<img alt="Version" src="https://img.shields.io/badge/version-2.0.4-3f51b5.svg?style=flat-square"/>
+<img alt="Version" src="https://img.shields.io/badge/version-2.4.0-3f51b5.svg?style=flat-square"/>
 <a href="https://flyhigher.top"><img alt="Author" src="https://img.shields.io/badge/author-Axton-red.svg?style=flat-square"/></a>
 <img alt="WordPress" src="https://img.shields.io/badge/WordPress-5.0%2B-blue.svg?style=flat-square"/>
 <a href="https://mdx.flyhigher.top"><img alt="Download" src="https://img.shields.io/badge/download-2.49M-brightgreen.svg?style=flat-square"/></a>

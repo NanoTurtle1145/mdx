@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: '要发布构建的 tag（如 v2.4.0）'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+          fetch-depth: 0
+
+      - name: Build theme zip
+        run: |
+          set -e
+          VERSION="${{ github.event.inputs.tag || github.ref_name }}"
+          VERSION="${VERSION#v}"
+          mkdir -p dist/mdx
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='tools' \
+            --exclude='.gitignore' \
+            --exclude='MAINTAINING.md' \
+            --exclude='*.zip' \
+            ./ dist/mdx/
+          cd dist
+          zip -qr "../mdx-${VERSION}.zip" mdx
+          ls -lh "../mdx-${VERSION}.zip"
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          name: MDx ${{ github.event.inputs.tag || github.ref_name }}
+          generate_release_notes: true
+          files: mdx-*.zip
