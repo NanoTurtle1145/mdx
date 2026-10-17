@@ -788,6 +788,31 @@ html.mdx-md3 body.has-admin-bar #indic .mdx-md3-linear-progress-indicator {
 }
 
 /* ==========================================================================
+ * 11.6 深色模式：关闭主题对标题 / 控件的 invert 滤镜
+ *      （MD3 已经给出浅色语义色，再叠加 invert 会让文字重新变暗）
+ * ========================================================================== */
+html.mdx-md3 body.mdui-theme-layout-dark article > h1,
+html.mdx-md3 body.mdui-theme-layout-dark article > h2,
+html.mdx-md3 body.mdui-theme-layout-dark article > h3,
+html.mdx-md3 body.mdui-theme-layout-dark article > h4,
+html.mdx-md3 body.mdui-theme-layout-dark article > h5,
+html.mdx-md3 body.mdui-theme-layout-dark article > h6,
+html.mdx-md3 body.mdui-theme-layout-dark article.searchCard h1,
+html.mdx-md3 body.mdui-theme-layout-dark #postlist h1,
+html.mdx-md3 body.mdui-theme-layout-dark #postlist h2,
+html.mdx-md3 body.mdui-theme-layout-dark .mdui-progress,
+html.mdx-md3 body.mdui-theme-layout-dark .mdui-spinner,
+html.mdx-md3 body.mdui-theme-layout-dark .mdui-tab-indicator,
+html.mdx-md3 body.mdui-theme-layout-dark #mdx_menu .current-menu-item,
+html.mdx-md3 body.mdui-theme-layout-dark #mdx_menu .current-menu-item > ul,
+html.mdx-md3 body.mdui-theme-layout-dark .mdx-side-title a,
+html.mdx-md3 body.mdui-theme-layout-dark .mdx-toc-item.mdui-list-item-active,
+html.mdx-md3 body.mdui-theme-layout-dark .mdx-toc-item.mdui-list-item-active > span,
+html.mdx-md3 body.mdui-theme-layout-dark #mdx-cookie-notice i.mdui-icon {
+    filter: none !important;
+}
+
+/* ==========================================================================
  * 12. 响应式
  * ========================================================================== */
 @media (max-width: 840px) {

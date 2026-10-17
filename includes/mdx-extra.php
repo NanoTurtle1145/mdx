@@ -300,6 +300,28 @@ function mdx_extra_inline_css() {
     }
 
     $css = '
+/* 深色模式：正文标题保持浅色，避免主题色标题在深色背景上看不清；
+   同时关闭主题对标题的 invert 滤镜（滤镜会把已调亮的标题再次反相变暗） */
+body.mdui-theme-layout-dark article h1,
+body.mdui-theme-layout-dark article h2,
+body.mdui-theme-layout-dark article h3,
+body.mdui-theme-layout-dark article h4,
+body.mdui-theme-layout-dark article h5,
+body.mdui-theme-layout-dark article h6,
+body.mdui-theme-layout-dark .mdui-typo h1,
+body.mdui-theme-layout-dark .mdui-typo h2,
+body.mdui-theme-layout-dark .mdui-typo h3,
+body.mdui-theme-layout-dark .mdui-typo h4,
+body.mdui-theme-layout-dark .mdui-typo h5,
+body.mdui-theme-layout-dark .mdui-typo h6,
+body.mdui-theme-layout-dark article.searchCard h1,
+body.mdui-theme-layout-dark #postlist h1,
+body.mdui-theme-layout-dark #postlist h2,
+body.mdui-theme-layout-dark .mdx-timeline li a .atitle,
+body.mdui-theme-layout-dark .mdx-search-empty-title {
+    color: rgba(255, 255, 255, 0.87) !important;
+    filter: none !important;
+}
 /* MDx 增强选项默认样式 */
 .mdx-reading-meta{margin:30px 0 0;font-size:14px;line-height:1.6;color:rgba(0,0,0,.54);}
 .mdx-license{margin:18px 0 0;padding:14px 18px;border-radius:4px;background:rgba(0,0,0,.04);font-size:13px;line-height:1.8;color:rgba(0,0,0,.6);word-break:break-all;}
