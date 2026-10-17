@@ -211,23 +211,38 @@
         <?php if (mdx_get_option("mdx_read_pro") === "true") { ?>
         //Show Read Pro'
         if (document.getElementById('indic')) {
-            // MD3 模式：使用 MD3 语义色，让环形进度在浅色/深色下都清晰可见
-            var mdx_md3_ring_color = function (name, fallback) {
-                if (!document.documentElement.classList.contains('mdx-md3')) {
-                    return fallback;
-                }
-                var value = getComputedStyle(document.body).getPropertyValue(name).trim();
-                return value ? 'rgb(' + value + ')' : fallback;
-            };
+            <?php if (mdx_option_true('mdx_md3')) { ?>
+            /* MD3：顶部线性阅读进度条（页面顶端 4px，轨道 surface-container-highest，进度条 primary） */
+            (function () {
+                var indic = document.getElementById('indic');
+                indic.innerHTML = '<div class="mdx-md3-linear-progress-indicator"></div>';
+                var bar = indic.firstChild;
+                var clamp = function (value) {
+                    value = parseFloat(value);
+                    if (isNaN(value)) { value = 0; }
+                    return Math.max(0, Math.min(100, value));
+                };
+                ind = {
+                    value: function (value) {
+                        var percent = clamp(value);
+                        bar.style.width = percent + '%';
+                        indic.style.opacity = percent > 0 ? '1' : '0';
+                    }
+                };
+                ind.value(0);
+            })();
+            <?php } else { ?>
+            // 原版：环形进度（radialIndicator）
             ind = radialIndicator("#indic", {
                 displayNumber: false,
                 radius: 26.5,
-                barColor: mdx_md3_ring_color('--mdui-color-on-primary-container', '#ffffff'),
+                barColor: '#ffffff',
                 roundCorner: false,
                 barWidth: 3,
                 precision: 3,
-                barBgColor: mdx_md3_ring_color('--mdui-color-primary', '<?php echo $mdx_style_act_hex;?>'),
+                barBgColor: '<?php echo $mdx_style_act_hex;?>',
             });
+            <?php } ?>
         }
         <?php } ?>
     </script>

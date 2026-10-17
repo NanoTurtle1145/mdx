@@ -1,6 +1,6 @@
 <div align="right">Language: English | <a title="Chinese" href="https://github.com/yrccondor/mdx/blob/master/README/zh_CN.md">Chinese</a> | <a title="Turkish" href="https://github.com/yrccondor/mdx/blob/master/README/tr_TR.md">Turkish</a></div>
 
-> **本仓库为 MDx 2.3.4 定制版本**：已适配 WordPress 6.4 ~ 7.1 / PHP 7.4 ~ 8.3，
+> **本仓库为 MDx 2.3.5 定制版本**：已适配 WordPress 6.4 ~ 7.1 / PHP 7.4 ~ 8.3，
 > 新增 **Material Design 3（MD3）完整风格**（与 MD2 选项对等、二选一；基于
 > [mdui.org](https://www.mdui.org/zh-cn/) 设计令牌与动态配色，不含任何 Banner 改动），
 > 以及 13 个阅读 / 外观增强选项（阅读时长、版权协议、自定义 CSS、登录页美化等）。

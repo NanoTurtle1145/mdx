@@ -299,13 +299,7 @@ html.mdx-md3 .mdui-fab:hover {
 html.mdx-md3 .mdui-fab i {
     color: inherit !important;
 }
-/* 回到顶部按钮：圆形以贴合主题内置的环形阅读进度 */
-html.mdx-md3 .scrollToTop {
-    border-radius: 50% !important;
-}
-html.mdx-md3 #indic {
-    opacity: 1;
-}
+/* 回到顶部按钮：保持 MD3 圆角方形 FAB（16px） */
 
 /* ==========================================================================
  * 5. 卡片 / 文章列表（只处理卡片容器，不处理其中的 Banner 图）
@@ -757,9 +751,52 @@ html.mdx-md3 body.mdui-theme-layout-dark #respond {
 }
 
 /* ==========================================================================
+ * 11.5 MD3 线性阅读进度（替代环形进度，显示在页面顶部）
+ * ========================================================================== */
+html.mdx-md3 #indic {
+    position: fixed !important;
+    /* 紧贴顶部应用栏下沿，避免与主题色应用栏同色而看不见 */
+    top: 64px !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: 4px !important;
+    opacity: 0;
+    background-color: rgb(var(--mdui-color-surface-container-highest)) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    pointer-events: none;
+    z-index: 3000 !important;
+    transform: none !important;
+    transition: opacity var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard) !important;
+}
+html.mdx-md3 #indic .mdx-md3-linear-progress-indicator {
+    display: block;
+    width: 0;
+    height: 100%;
+    background-color: rgb(var(--mdui-color-primary)) !important;
+    border-radius: inherit;
+    transition: width var(--mdui-motion-duration-short2, 100ms) linear;
+}
+/* 登录状态下 WordPress 管理工具栏会下移 32px */
+html.mdx-md3 body.has-admin-bar #indic {
+    top: 96px !important;
+}
+html.mdx-md3 body.has-admin-bar #indic .mdx-md3-linear-progress-indicator {
+    background-color: rgb(var(--mdui-color-primary)) !important;
+}
+
+/* ==========================================================================
  * 12. 响应式
  * ========================================================================== */
 @media (max-width: 840px) {
+    html.mdx-md3 #indic {
+        top: 56px !important;
+    }
+    html.mdx-md3 body.has-admin-bar #indic {
+        top: 102px !important;
+    }
     html.mdx-md3 .mdui-btn {
         height: 38px;
         padding: 0 20px !important;
