@@ -183,9 +183,17 @@ function mdx_css() {
         wp_register_style('mdx_oled', $files_root.'/css/oled.css', '', '');
         wp_enqueue_style('mdx_oled');
     }
-    if (mdx_get_option("mdx_md2") == "true") {
+    if (mdx_get_option("mdx_md2") == "true" && !mdx_option_true('mdx_md3')) {
         wp_register_style('mdx_md2', $files_root.'/css/md2.css', '', '');
         wp_enqueue_style('mdx_md2');
+    }
+    // MD3（Material Design 3）外观层：设计令牌 + 组件样式
+    if (mdx_option_true('mdx_md3')) {
+        wp_register_style('mdx_md3_tokens', get_template_directory_uri().'/css/md3-tokens.css', array('mdx_style_css'), get_option('mdx_version_commit'));
+        wp_register_style('mdx_md3_css', get_template_directory_uri().'/css/md3.css', array('mdx_md3_tokens'), get_option('mdx_version_commit'));
+        wp_enqueue_style('mdx_md3_tokens');
+        wp_enqueue_style('mdx_md3_css');
+        mdx_md3_inline_css();
     }
     if (is_home() && mdx_get_option('mdx_index_head_style') === 'slide') {
         wp_register_style('mdx_flickity_css', $files_root.'/css/flickity.min.css', '', '');
@@ -201,7 +209,7 @@ function mdx_css_login() {
         wp_register_style('mdx_style_css_login', $files_root.'/css/login.css', '', '');
         wp_enqueue_style('mdx_mdui_css_login');
         wp_enqueue_style('mdx_style_css_login');
-        if (mdx_get_option("mdx_md2") == "true") {
+        if (mdx_get_option("mdx_md2") == "true" && !mdx_option_true('mdx_md3')) {
             wp_register_style('mdx_md2_login', $files_root.'/css/md2.css', '', '');
             wp_enqueue_style('mdx_md2_login');
         }
@@ -211,6 +219,19 @@ function mdx_css_login() {
 if (mdx_get_option("mdx_login_md") === "true") {
     add_action('login_enqueue_scripts', 'mdx_css_login');
 }
+
+// MD3 登录页样式（不依赖「Material 风格登录页」选项）
+function mdx_md3_login_assets() {
+    if (!mdx_option_true('mdx_md3')) {
+        return;
+    }
+    wp_register_style('mdx_md3_tokens_login', get_template_directory_uri() . '/css/md3-tokens.css', '', get_option('mdx_version_commit'));
+    wp_register_style('mdx_md3_css_login', get_template_directory_uri() . '/css/md3.css', array('mdx_md3_tokens_login'), get_option('mdx_version_commit'));
+    wp_enqueue_style('mdx_md3_tokens_login');
+    wp_enqueue_style('mdx_md3_css_login');
+    mdx_md3_inline_css('mdx_md3_css_login');
+}
+add_action('login_enqueue_scripts', 'mdx_md3_login_assets', 5);
 
 function mdx_js() {
     global $files_root;

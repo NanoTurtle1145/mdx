@@ -1,9 +1,11 @@
 <div align="right">Language: English | <a title="Chinese" href="https://github.com/yrccondor/mdx/blob/master/README/zh_CN.md">Chinese</a> | <a title="Turkish" href="https://github.com/yrccondor/mdx/blob/master/README/tr_TR.md">Turkish</a></div>
 
-> **本仓库为 MDx 2.1.0 定制版本**：已适配 WordPress 6.4 ~ 7.1 / PHP 7.4 ~ 8.3，
-> 修复了新版 WordPress 下的兼容性问题，并新增了 13 个自定义选项（阅读时长、版权协议、
-> 自定义 CSS、登录页美化、性能开关等）。
-> 详细说明、安装方法与验证记录见 **[CHANGELOG-2.1.0.md](CHANGELOG-2.1.0.md)**。
+> **本仓库为 MDx 2.2.0 定制版本**：已适配 WordPress 6.4 ~ 7.1 / PHP 7.4 ~ 8.3，
+> 新增 **Material Design 3（MD3 / Material You）外观**（基于 [mdui.org](https://www.mdui.org/zh-cn/) 设计令牌、
+> 动态配色、可开关），以及 13 个阅读 / 外观增强选项（阅读时长、版权协议、自定义 CSS、登录页美化等）。
+>
+> - MD3 说明见 **[CHANGELOG-2.2.0.md](CHANGELOG-2.2.0.md)**
+> - 2.1.0 兼容性修复与新增选项见 **[CHANGELOG-2.1.0.md](CHANGELOG-2.1.0.md)**
 
 <br>
 

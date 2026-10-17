@@ -1,0 +1,1612 @@
+/*!
+ * MD3 设计令牌（颜色部分）—— 由 tools/build-md3-tokens.js 自动生成，请勿手动编辑。
+ * 算法：Material Color Utilities（与 mdui 2 / Material You 一致）。
+ * 每个主题主色 / 强调色都会生成浅色与深色两套语义颜色。
+ */
+
+:root {
+  --mdui-color-error: 179, 38, 30;
+  --mdui-color-on-error: 255, 255, 255;
+  --mdui-color-error-container: 249, 222, 220;
+  --mdui-color-on-error-container: 65, 14, 11;
+  --mdui-color-shadow: 0, 0, 0;
+  --mdui-color-scrim: 0, 0, 0;
+}
+
+body {
+  --mdui-color-primary: 67, 85, 185;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 222, 224, 255;
+  --mdui-color-on-primary-container: 0, 16, 92;
+  --mdui-color-inverse-primary: 186, 195, 255;
+  --mdui-color-secondary: 91, 93, 114;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 224, 225, 249;
+  --mdui-color-on-secondary-container: 24, 26, 44;
+  --mdui-color-surface: 251, 248, 253;
+  --mdui-color-on-surface: 27, 27, 31;
+  --mdui-color-surface-dim: 220, 217, 222;
+  --mdui-color-surface-bright: 251, 248, 253;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 246, 242, 247;
+  --mdui-color-surface-container: 240, 237, 241;
+  --mdui-color-surface-container-high: 234, 231, 236;
+  --mdui-color-surface-container-highest: 228, 225, 230;
+  --mdui-color-surface-variant: 227, 225, 236;
+  --mdui-color-on-surface-variant: 70, 70, 79;
+  --mdui-color-background: 251, 248, 253;
+  --mdui-color-on-background: 27, 27, 31;
+  --mdui-color-inverse-surface: 48, 48, 52;
+  --mdui-color-inverse-on-surface: 243, 240, 244;
+  --mdui-color-outline: 118, 118, 128;
+  --mdui-color-outline-variant: 199, 197, 208;
+  --mdui-color-surface-tint: 67, 85, 185;
+}
+
+body.mdui-theme-layout-dark {
+  --mdui-color-primary: 186, 195, 255;
+  --mdui-color-on-primary: 8, 33, 138;
+  --mdui-color-primary-container: 41, 60, 160;
+  --mdui-color-on-primary-container: 222, 224, 255;
+  --mdui-color-inverse-primary: 67, 85, 185;
+  --mdui-color-secondary: 195, 197, 221;
+  --mdui-color-on-secondary: 45, 47, 66;
+  --mdui-color-secondary-container: 67, 70, 89;
+  --mdui-color-on-secondary-container: 224, 225, 249;
+  --mdui-color-surface: 19, 19, 22;
+  --mdui-color-on-surface: 228, 225, 230;
+  --mdui-color-surface-dim: 19, 19, 22;
+  --mdui-color-surface-bright: 57, 57, 60;
+  --mdui-color-surface-container-lowest: 14, 14, 17;
+  --mdui-color-surface-container-low: 27, 27, 31;
+  --mdui-color-surface-container: 31, 31, 35;
+  --mdui-color-surface-container-high: 42, 42, 45;
+  --mdui-color-surface-container-highest: 53, 52, 56;
+  --mdui-color-surface-variant: 70, 70, 79;
+  --mdui-color-on-surface-variant: 199, 197, 208;
+  --mdui-color-background: 19, 19, 22;
+  --mdui-color-on-background: 228, 225, 230;
+  --mdui-color-inverse-surface: 228, 225, 230;
+  --mdui-color-inverse-on-surface: 48, 48, 52;
+  --mdui-color-outline: 144, 144, 154;
+  --mdui-color-outline-variant: 70, 70, 79;
+  --mdui-color-surface-tint: 186, 195, 255;
+}
+
+body {
+  --mdui-color-tertiary: 187, 0, 84;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 255, 217, 223;
+  --mdui-color-on-tertiary-container: 63, 0, 24;
+}
+
+body.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 255, 177, 193;
+  --mdui-color-on-tertiary: 102, 0, 42;
+  --mdui-color-tertiary-container: 143, 0, 63;
+  --mdui-color-on-tertiary-container: 255, 217, 223;
+}
+
+
+/* 主色：red */
+body.mdui-theme-primary-red {
+  --mdui-color-primary: 187, 22, 20;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 255, 218, 213;
+  --mdui-color-on-primary-container: 65, 0, 1;
+  --mdui-color-inverse-primary: 255, 180, 169;
+  --mdui-color-secondary: 119, 86, 82;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 255, 218, 213;
+  --mdui-color-on-secondary-container: 44, 21, 18;
+  --mdui-color-surface: 255, 248, 247;
+  --mdui-color-on-surface: 32, 26, 25;
+  --mdui-color-surface-dim: 228, 215, 213;
+  --mdui-color-surface-bright: 255, 248, 247;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 254, 241, 239;
+  --mdui-color-surface-container: 248, 235, 233;
+  --mdui-color-surface-container-high: 243, 229, 227;
+  --mdui-color-surface-container-highest: 237, 224, 222;
+  --mdui-color-surface-variant: 245, 221, 218;
+  --mdui-color-on-surface-variant: 83, 67, 65;
+  --mdui-color-background: 255, 248, 247;
+  --mdui-color-on-background: 32, 26, 25;
+  --mdui-color-inverse-surface: 54, 47, 46;
+  --mdui-color-inverse-on-surface: 251, 238, 236;
+  --mdui-color-outline: 133, 115, 112;
+  --mdui-color-outline-variant: 216, 194, 190;
+  --mdui-color-surface-tint: 187, 22, 20;
+}
+
+body.mdui-theme-primary-red.mdui-theme-layout-dark {
+  --mdui-color-primary: 255, 180, 169;
+  --mdui-color-on-primary: 105, 0, 2;
+  --mdui-color-primary-container: 147, 0, 5;
+  --mdui-color-on-primary-container: 255, 218, 213;
+  --mdui-color-inverse-primary: 187, 22, 20;
+  --mdui-color-secondary: 231, 189, 183;
+  --mdui-color-on-secondary: 68, 41, 38;
+  --mdui-color-secondary-container: 93, 63, 59;
+  --mdui-color-on-secondary-container: 255, 218, 213;
+  --mdui-color-surface: 24, 18, 17;
+  --mdui-color-on-surface: 237, 224, 222;
+  --mdui-color-surface-dim: 24, 18, 17;
+  --mdui-color-surface-bright: 63, 55, 54;
+  --mdui-color-surface-container-lowest: 18, 13, 12;
+  --mdui-color-surface-container-low: 32, 26, 25;
+  --mdui-color-surface-container: 37, 30, 29;
+  --mdui-color-surface-container-high: 47, 40, 39;
+  --mdui-color-surface-container-highest: 59, 51, 50;
+  --mdui-color-surface-variant: 83, 67, 65;
+  --mdui-color-on-surface-variant: 216, 194, 190;
+  --mdui-color-background: 24, 18, 17;
+  --mdui-color-on-background: 237, 224, 222;
+  --mdui-color-inverse-surface: 237, 224, 222;
+  --mdui-color-inverse-on-surface: 54, 47, 46;
+  --mdui-color-outline: 160, 140, 137;
+  --mdui-color-outline-variant: 83, 67, 65;
+  --mdui-color-surface-tint: 255, 180, 169;
+}
+
+/* 主色：pink */
+body.mdui-theme-primary-pink {
+  --mdui-color-primary: 188, 0, 75;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 255, 217, 222;
+  --mdui-color-on-primary-container: 64, 0, 20;
+  --mdui-color-inverse-primary: 255, 178, 190;
+  --mdui-color-secondary: 117, 86, 91;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 255, 217, 222;
+  --mdui-color-on-secondary-container: 44, 21, 25;
+  --mdui-color-surface: 255, 248, 247;
+  --mdui-color-on-surface: 32, 26, 27;
+  --mdui-color-surface-dim: 227, 215, 216;
+  --mdui-color-surface-bright: 255, 248, 247;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 253, 241, 241;
+  --mdui-color-surface-container: 248, 235, 235;
+  --mdui-color-surface-container-high: 242, 229, 230;
+  --mdui-color-surface-container-highest: 236, 224, 224;
+  --mdui-color-surface-variant: 243, 221, 223;
+  --mdui-color-on-surface-variant: 82, 67, 69;
+  --mdui-color-background: 255, 248, 247;
+  --mdui-color-on-background: 32, 26, 27;
+  --mdui-color-inverse-surface: 54, 47, 47;
+  --mdui-color-inverse-on-surface: 251, 238, 238;
+  --mdui-color-outline: 132, 115, 117;
+  --mdui-color-outline-variant: 214, 194, 195;
+  --mdui-color-surface-tint: 188, 0, 75;
+}
+
+body.mdui-theme-primary-pink.mdui-theme-layout-dark {
+  --mdui-color-primary: 255, 178, 190;
+  --mdui-color-on-primary: 102, 0, 37;
+  --mdui-color-primary-container: 144, 0, 56;
+  --mdui-color-on-primary-container: 255, 217, 222;
+  --mdui-color-inverse-primary: 188, 0, 75;
+  --mdui-color-secondary: 229, 189, 194;
+  --mdui-color-on-secondary: 67, 41, 45;
+  --mdui-color-secondary-container: 92, 63, 67;
+  --mdui-color-on-secondary-container: 255, 217, 222;
+  --mdui-color-surface: 24, 18, 19;
+  --mdui-color-on-surface: 236, 224, 224;
+  --mdui-color-surface-dim: 24, 18, 19;
+  --mdui-color-surface-bright: 63, 55, 56;
+  --mdui-color-surface-container-lowest: 18, 13, 13;
+  --mdui-color-surface-container-low: 32, 26, 27;
+  --mdui-color-surface-container: 36, 30, 31;
+  --mdui-color-surface-container-high: 47, 40, 41;
+  --mdui-color-surface-container-highest: 58, 51, 52;
+  --mdui-color-surface-variant: 82, 67, 69;
+  --mdui-color-on-surface-variant: 214, 194, 195;
+  --mdui-color-background: 24, 18, 19;
+  --mdui-color-on-background: 236, 224, 224;
+  --mdui-color-inverse-surface: 236, 224, 224;
+  --mdui-color-inverse-on-surface: 54, 47, 47;
+  --mdui-color-outline: 159, 140, 142;
+  --mdui-color-outline-variant: 82, 67, 69;
+  --mdui-color-surface-tint: 255, 178, 190;
+}
+
+/* 主色：purple */
+body.mdui-theme-primary-purple {
+  --mdui-color-primary: 154, 37, 174;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 255, 214, 254;
+  --mdui-color-on-primary-container: 53, 0, 63;
+  --mdui-color-inverse-primary: 249, 171, 255;
+  --mdui-color-secondary: 107, 88, 107;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 244, 219, 241;
+  --mdui-color-on-secondary-container: 37, 22, 38;
+  --mdui-color-surface: 255, 247, 250;
+  --mdui-color-on-surface: 30, 26, 29;
+  --mdui-color-surface-dim: 224, 216, 220;
+  --mdui-color-surface-bright: 255, 247, 250;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 250, 241, 245;
+  --mdui-color-surface-container: 244, 236, 240;
+  --mdui-color-surface-container-high: 238, 230, 234;
+  --mdui-color-surface-container-highest: 233, 224, 228;
+  --mdui-color-surface-variant: 236, 223, 232;
+  --mdui-color-on-surface-variant: 77, 68, 76;
+  --mdui-color-background: 255, 247, 250;
+  --mdui-color-on-background: 30, 26, 29;
+  --mdui-color-inverse-surface: 51, 47, 50;
+  --mdui-color-inverse-on-surface: 247, 238, 243;
+  --mdui-color-outline: 127, 116, 125;
+  --mdui-color-outline-variant: 208, 195, 204;
+  --mdui-color-surface-tint: 154, 37, 174;
+}
+
+body.mdui-theme-primary-purple.mdui-theme-layout-dark {
+  --mdui-color-primary: 249, 171, 255;
+  --mdui-color-on-primary: 87, 0, 102;
+  --mdui-color-primary-container: 123, 0, 143;
+  --mdui-color-on-primary-container: 255, 214, 254;
+  --mdui-color-inverse-primary: 154, 37, 174;
+  --mdui-color-secondary: 215, 191, 213;
+  --mdui-color-on-secondary: 59, 43, 60;
+  --mdui-color-secondary-container: 83, 65, 83;
+  --mdui-color-on-secondary-container: 244, 219, 241;
+  --mdui-color-surface: 22, 18, 21;
+  --mdui-color-on-surface: 233, 224, 228;
+  --mdui-color-surface-dim: 22, 18, 21;
+  --mdui-color-surface-bright: 60, 56, 59;
+  --mdui-color-surface-container-lowest: 16, 13, 16;
+  --mdui-color-surface-container-low: 30, 26, 29;
+  --mdui-color-surface-container: 34, 30, 34;
+  --mdui-color-surface-container-high: 45, 41, 44;
+  --mdui-color-surface-container-highest: 56, 51, 55;
+  --mdui-color-surface-variant: 77, 68, 76;
+  --mdui-color-on-surface-variant: 208, 195, 204;
+  --mdui-color-background: 22, 18, 21;
+  --mdui-color-on-background: 233, 224, 228;
+  --mdui-color-inverse-surface: 233, 224, 228;
+  --mdui-color-inverse-on-surface: 51, 47, 50;
+  --mdui-color-outline: 153, 141, 150;
+  --mdui-color-outline-variant: 77, 68, 76;
+  --mdui-color-surface-tint: 249, 171, 255;
+}
+
+/* 主色：deep-purple */
+body.mdui-theme-primary-deep-purple {
+  --mdui-color-primary: 111, 67, 192;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 235, 221, 255;
+  --mdui-color-on-primary-container: 37, 0, 89;
+  --mdui-color-inverse-primary: 211, 187, 255;
+  --mdui-color-secondary: 99, 91, 112;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 233, 222, 248;
+  --mdui-color-on-secondary-container: 31, 24, 43;
+  --mdui-color-surface: 254, 248, 253;
+  --mdui-color-on-surface: 29, 27, 30;
+  --mdui-color-surface-dim: 222, 216, 221;
+  --mdui-color-surface-bright: 254, 248, 253;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 248, 242, 247;
+  --mdui-color-surface-container: 242, 236, 241;
+  --mdui-color-surface-container-high: 236, 230, 235;
+  --mdui-color-surface-container-highest: 230, 225, 230;
+  --mdui-color-surface-variant: 231, 224, 235;
+  --mdui-color-on-surface-variant: 73, 69, 78;
+  --mdui-color-background: 254, 248, 253;
+  --mdui-color-on-background: 29, 27, 30;
+  --mdui-color-inverse-surface: 50, 48, 51;
+  --mdui-color-inverse-on-surface: 245, 239, 244;
+  --mdui-color-outline: 122, 117, 127;
+  --mdui-color-outline-variant: 203, 196, 207;
+  --mdui-color-surface-tint: 111, 67, 192;
+}
+
+body.mdui-theme-primary-deep-purple.mdui-theme-layout-dark {
+  --mdui-color-primary: 211, 187, 255;
+  --mdui-color-on-primary: 63, 0, 141;
+  --mdui-color-primary-container: 87, 39, 166;
+  --mdui-color-on-primary-container: 235, 221, 255;
+  --mdui-color-inverse-primary: 111, 67, 192;
+  --mdui-color-secondary: 205, 194, 219;
+  --mdui-color-on-secondary: 52, 45, 64;
+  --mdui-color-secondary-container: 75, 67, 88;
+  --mdui-color-on-secondary-container: 233, 222, 248;
+  --mdui-color-surface: 20, 19, 22;
+  --mdui-color-on-surface: 230, 225, 230;
+  --mdui-color-surface-dim: 20, 19, 22;
+  --mdui-color-surface-bright: 59, 56, 60;
+  --mdui-color-surface-container-lowest: 15, 14, 17;
+  --mdui-color-surface-container-low: 29, 27, 30;
+  --mdui-color-surface-container: 33, 31, 34;
+  --mdui-color-surface-container-high: 43, 41, 45;
+  --mdui-color-surface-container-highest: 54, 52, 56;
+  --mdui-color-surface-variant: 73, 69, 78;
+  --mdui-color-on-surface-variant: 203, 196, 207;
+  --mdui-color-background: 20, 19, 22;
+  --mdui-color-on-background: 230, 225, 230;
+  --mdui-color-inverse-surface: 230, 225, 230;
+  --mdui-color-inverse-on-surface: 50, 48, 51;
+  --mdui-color-outline: 148, 143, 153;
+  --mdui-color-outline-variant: 73, 69, 78;
+  --mdui-color-surface-tint: 211, 187, 255;
+}
+
+/* 主色：indigo */
+body.mdui-theme-primary-indigo {
+  --mdui-color-primary: 67, 85, 185;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 222, 224, 255;
+  --mdui-color-on-primary-container: 0, 16, 92;
+  --mdui-color-inverse-primary: 186, 195, 255;
+  --mdui-color-secondary: 91, 93, 114;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 224, 225, 249;
+  --mdui-color-on-secondary-container: 24, 26, 44;
+  --mdui-color-surface: 251, 248, 253;
+  --mdui-color-on-surface: 27, 27, 31;
+  --mdui-color-surface-dim: 220, 217, 222;
+  --mdui-color-surface-bright: 251, 248, 253;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 246, 242, 247;
+  --mdui-color-surface-container: 240, 237, 241;
+  --mdui-color-surface-container-high: 234, 231, 236;
+  --mdui-color-surface-container-highest: 228, 225, 230;
+  --mdui-color-surface-variant: 227, 225, 236;
+  --mdui-color-on-surface-variant: 70, 70, 79;
+  --mdui-color-background: 251, 248, 253;
+  --mdui-color-on-background: 27, 27, 31;
+  --mdui-color-inverse-surface: 48, 48, 52;
+  --mdui-color-inverse-on-surface: 243, 240, 244;
+  --mdui-color-outline: 118, 118, 128;
+  --mdui-color-outline-variant: 199, 197, 208;
+  --mdui-color-surface-tint: 67, 85, 185;
+}
+
+body.mdui-theme-primary-indigo.mdui-theme-layout-dark {
+  --mdui-color-primary: 186, 195, 255;
+  --mdui-color-on-primary: 8, 33, 138;
+  --mdui-color-primary-container: 41, 60, 160;
+  --mdui-color-on-primary-container: 222, 224, 255;
+  --mdui-color-inverse-primary: 67, 85, 185;
+  --mdui-color-secondary: 195, 197, 221;
+  --mdui-color-on-secondary: 45, 47, 66;
+  --mdui-color-secondary-container: 67, 70, 89;
+  --mdui-color-on-secondary-container: 224, 225, 249;
+  --mdui-color-surface: 19, 19, 22;
+  --mdui-color-on-surface: 228, 225, 230;
+  --mdui-color-surface-dim: 19, 19, 22;
+  --mdui-color-surface-bright: 57, 57, 60;
+  --mdui-color-surface-container-lowest: 14, 14, 17;
+  --mdui-color-surface-container-low: 27, 27, 31;
+  --mdui-color-surface-container: 31, 31, 35;
+  --mdui-color-surface-container-high: 42, 42, 45;
+  --mdui-color-surface-container-highest: 53, 52, 56;
+  --mdui-color-surface-variant: 70, 70, 79;
+  --mdui-color-on-surface-variant: 199, 197, 208;
+  --mdui-color-background: 19, 19, 22;
+  --mdui-color-on-background: 228, 225, 230;
+  --mdui-color-inverse-surface: 228, 225, 230;
+  --mdui-color-inverse-on-surface: 48, 48, 52;
+  --mdui-color-outline: 144, 144, 154;
+  --mdui-color-outline-variant: 70, 70, 79;
+  --mdui-color-surface-tint: 186, 195, 255;
+}
+
+/* 主色：blue */
+body.mdui-theme-primary-blue {
+  --mdui-color-primary: 0, 97, 164;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 209, 228, 255;
+  --mdui-color-on-primary-container: 0, 29, 54;
+  --mdui-color-inverse-primary: 158, 202, 255;
+  --mdui-color-secondary: 83, 95, 112;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 215, 227, 247;
+  --mdui-color-on-secondary-container: 16, 28, 43;
+  --mdui-color-surface: 250, 249, 252;
+  --mdui-color-on-surface: 26, 28, 30;
+  --mdui-color-surface-dim: 218, 218, 221;
+  --mdui-color-surface-bright: 250, 249, 252;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 244, 243, 247;
+  --mdui-color-surface-container: 238, 237, 241;
+  --mdui-color-surface-container-high: 232, 232, 235;
+  --mdui-color-surface-container-highest: 226, 226, 230;
+  --mdui-color-surface-variant: 223, 226, 235;
+  --mdui-color-on-surface-variant: 67, 71, 78;
+  --mdui-color-background: 250, 249, 252;
+  --mdui-color-on-background: 26, 28, 30;
+  --mdui-color-inverse-surface: 47, 48, 51;
+  --mdui-color-inverse-on-surface: 241, 240, 244;
+  --mdui-color-outline: 115, 119, 127;
+  --mdui-color-outline-variant: 195, 199, 207;
+  --mdui-color-surface-tint: 0, 97, 164;
+}
+
+body.mdui-theme-primary-blue.mdui-theme-layout-dark {
+  --mdui-color-primary: 158, 202, 255;
+  --mdui-color-on-primary: 0, 50, 88;
+  --mdui-color-primary-container: 0, 73, 125;
+  --mdui-color-on-primary-container: 209, 228, 255;
+  --mdui-color-inverse-primary: 0, 97, 164;
+  --mdui-color-secondary: 187, 199, 219;
+  --mdui-color-on-secondary: 37, 49, 64;
+  --mdui-color-secondary-container: 59, 72, 88;
+  --mdui-color-on-secondary-container: 215, 227, 247;
+  --mdui-color-surface: 18, 19, 22;
+  --mdui-color-on-surface: 226, 226, 230;
+  --mdui-color-surface-dim: 18, 19, 22;
+  --mdui-color-surface-bright: 56, 57, 60;
+  --mdui-color-surface-container-lowest: 13, 14, 17;
+  --mdui-color-surface-container-low: 26, 28, 30;
+  --mdui-color-surface-container: 30, 32, 34;
+  --mdui-color-surface-container-high: 40, 42, 45;
+  --mdui-color-surface-container-highest: 51, 53, 56;
+  --mdui-color-surface-variant: 67, 71, 78;
+  --mdui-color-on-surface-variant: 195, 199, 207;
+  --mdui-color-background: 18, 19, 22;
+  --mdui-color-on-background: 226, 226, 230;
+  --mdui-color-inverse-surface: 226, 226, 230;
+  --mdui-color-inverse-on-surface: 47, 48, 51;
+  --mdui-color-outline: 141, 145, 153;
+  --mdui-color-outline-variant: 67, 71, 78;
+  --mdui-color-surface-tint: 158, 202, 255;
+}
+
+/* 主色：light-blue */
+body.mdui-theme-primary-light-blue {
+  --mdui-color-primary: 0, 100, 147;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 202, 230, 255;
+  --mdui-color-on-primary-container: 0, 30, 48;
+  --mdui-color-inverse-primary: 141, 205, 255;
+  --mdui-color-secondary: 80, 96, 110;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 211, 229, 245;
+  --mdui-color-on-secondary-container: 12, 29, 41;
+  --mdui-color-surface: 249, 249, 252;
+  --mdui-color-on-surface: 26, 28, 30;
+  --mdui-color-surface-dim: 217, 218, 221;
+  --mdui-color-surface-bright: 249, 249, 252;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 243, 243, 246;
+  --mdui-color-surface-container: 237, 238, 241;
+  --mdui-color-surface-container-high: 232, 232, 235;
+  --mdui-color-surface-container-highest: 226, 226, 229;
+  --mdui-color-surface-variant: 221, 227, 234;
+  --mdui-color-on-surface-variant: 65, 71, 77;
+  --mdui-color-background: 249, 249, 252;
+  --mdui-color-on-background: 26, 28, 30;
+  --mdui-color-inverse-surface: 46, 49, 51;
+  --mdui-color-inverse-on-surface: 240, 240, 243;
+  --mdui-color-outline: 114, 120, 126;
+  --mdui-color-outline-variant: 193, 199, 206;
+  --mdui-color-surface-tint: 0, 100, 147;
+}
+
+body.mdui-theme-primary-light-blue.mdui-theme-layout-dark {
+  --mdui-color-primary: 141, 205, 255;
+  --mdui-color-on-primary: 0, 52, 79;
+  --mdui-color-primary-container: 0, 75, 112;
+  --mdui-color-on-primary-container: 202, 230, 255;
+  --mdui-color-inverse-primary: 0, 100, 147;
+  --mdui-color-secondary: 183, 201, 217;
+  --mdui-color-on-secondary: 34, 50, 63;
+  --mdui-color-secondary-container: 56, 73, 86;
+  --mdui-color-on-secondary-container: 211, 229, 245;
+  --mdui-color-surface: 17, 20, 22;
+  --mdui-color-on-surface: 226, 226, 229;
+  --mdui-color-surface-dim: 17, 20, 22;
+  --mdui-color-surface-bright: 55, 57, 60;
+  --mdui-color-surface-container-lowest: 12, 14, 17;
+  --mdui-color-surface-container-low: 26, 28, 30;
+  --mdui-color-surface-container: 30, 32, 34;
+  --mdui-color-surface-container-high: 40, 42, 45;
+  --mdui-color-surface-container-highest: 51, 53, 55;
+  --mdui-color-surface-variant: 65, 71, 77;
+  --mdui-color-on-surface-variant: 193, 199, 206;
+  --mdui-color-background: 17, 20, 22;
+  --mdui-color-on-background: 226, 226, 229;
+  --mdui-color-inverse-surface: 226, 226, 229;
+  --mdui-color-inverse-on-surface: 46, 49, 51;
+  --mdui-color-outline: 139, 145, 152;
+  --mdui-color-outline-variant: 65, 71, 77;
+  --mdui-color-surface-tint: 141, 205, 255;
+}
+
+/* 主色：cyan */
+body.mdui-theme-primary-cyan {
+  --mdui-color-primary: 0, 104, 118;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 161, 239, 255;
+  --mdui-color-on-primary-container: 0, 31, 37;
+  --mdui-color-inverse-primary: 68, 216, 241;
+  --mdui-color-secondary: 74, 98, 104;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 205, 231, 237;
+  --mdui-color-on-secondary-container: 5, 31, 35;
+  --mdui-color-surface: 248, 250, 250;
+  --mdui-color-on-surface: 25, 28, 29;
+  --mdui-color-surface-dim: 216, 218, 219;
+  --mdui-color-surface-bright: 248, 250, 250;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 242, 244, 244;
+  --mdui-color-surface-container: 236, 238, 239;
+  --mdui-color-surface-container-high: 230, 232, 233;
+  --mdui-color-surface-container-highest: 225, 227, 227;
+  --mdui-color-surface-variant: 219, 228, 230;
+  --mdui-color-on-surface-variant: 63, 72, 74;
+  --mdui-color-background: 248, 250, 250;
+  --mdui-color-on-background: 25, 28, 29;
+  --mdui-color-inverse-surface: 46, 49, 50;
+  --mdui-color-inverse-on-surface: 239, 241, 242;
+  --mdui-color-outline: 111, 121, 123;
+  --mdui-color-outline-variant: 191, 200, 202;
+  --mdui-color-surface-tint: 0, 104, 118;
+}
+
+body.mdui-theme-primary-cyan.mdui-theme-layout-dark {
+  --mdui-color-primary: 68, 216, 241;
+  --mdui-color-on-primary: 0, 54, 62;
+  --mdui-color-primary-container: 0, 78, 89;
+  --mdui-color-on-primary-container: 161, 239, 255;
+  --mdui-color-inverse-primary: 0, 104, 118;
+  --mdui-color-secondary: 177, 203, 209;
+  --mdui-color-on-secondary: 28, 52, 57;
+  --mdui-color-secondary-container: 51, 74, 80;
+  --mdui-color-on-secondary-container: 205, 231, 237;
+  --mdui-color-surface: 17, 20, 21;
+  --mdui-color-on-surface: 225, 227, 227;
+  --mdui-color-surface-dim: 17, 20, 21;
+  --mdui-color-surface-bright: 54, 58, 59;
+  --mdui-color-surface-container-lowest: 11, 15, 16;
+  --mdui-color-surface-container-low: 25, 28, 29;
+  --mdui-color-surface-container: 29, 32, 33;
+  --mdui-color-surface-container-high: 39, 43, 43;
+  --mdui-color-surface-container-highest: 50, 53, 54;
+  --mdui-color-surface-variant: 63, 72, 74;
+  --mdui-color-on-surface-variant: 191, 200, 202;
+  --mdui-color-background: 17, 20, 21;
+  --mdui-color-on-background: 225, 227, 227;
+  --mdui-color-inverse-surface: 225, 227, 227;
+  --mdui-color-inverse-on-surface: 46, 49, 50;
+  --mdui-color-outline: 137, 146, 149;
+  --mdui-color-outline-variant: 63, 72, 74;
+  --mdui-color-surface-tint: 68, 216, 241;
+}
+
+/* 主色：teal */
+body.mdui-theme-primary-teal {
+  --mdui-color-primary: 0, 106, 96;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 116, 248, 229;
+  --mdui-color-on-primary-container: 0, 32, 28;
+  --mdui-color-inverse-primary: 83, 219, 201;
+  --mdui-color-secondary: 74, 99, 95;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 204, 232, 226;
+  --mdui-color-on-secondary-container: 5, 32, 28;
+  --mdui-color-surface: 247, 250, 248;
+  --mdui-color-on-surface: 25, 28, 27;
+  --mdui-color-surface-dim: 216, 219, 217;
+  --mdui-color-surface-bright: 247, 250, 248;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 242, 244, 242;
+  --mdui-color-surface-container: 236, 238, 236;
+  --mdui-color-surface-container-high: 230, 233, 231;
+  --mdui-color-surface-container-highest: 224, 227, 225;
+  --mdui-color-surface-variant: 218, 229, 225;
+  --mdui-color-on-surface-variant: 63, 73, 71;
+  --mdui-color-background: 247, 250, 248;
+  --mdui-color-on-background: 25, 28, 27;
+  --mdui-color-inverse-surface: 45, 49, 48;
+  --mdui-color-inverse-on-surface: 239, 241, 239;
+  --mdui-color-outline: 111, 121, 119;
+  --mdui-color-outline-variant: 190, 201, 198;
+  --mdui-color-surface-tint: 0, 106, 96;
+}
+
+body.mdui-theme-primary-teal.mdui-theme-layout-dark {
+  --mdui-color-primary: 83, 219, 201;
+  --mdui-color-on-primary: 0, 55, 49;
+  --mdui-color-primary-container: 0, 80, 72;
+  --mdui-color-on-primary-container: 116, 248, 229;
+  --mdui-color-inverse-primary: 0, 106, 96;
+  --mdui-color-secondary: 177, 204, 198;
+  --mdui-color-on-secondary: 28, 53, 49;
+  --mdui-color-secondary-container: 51, 75, 71;
+  --mdui-color-on-secondary-container: 204, 232, 226;
+  --mdui-color-surface: 16, 20, 19;
+  --mdui-color-on-surface: 224, 227, 225;
+  --mdui-color-surface-dim: 16, 20, 19;
+  --mdui-color-surface-bright: 54, 58, 57;
+  --mdui-color-surface-container-lowest: 11, 15, 14;
+  --mdui-color-surface-container-low: 25, 28, 27;
+  --mdui-color-surface-container: 29, 32, 31;
+  --mdui-color-surface-container-high: 39, 43, 42;
+  --mdui-color-surface-container-highest: 50, 53, 52;
+  --mdui-color-surface-variant: 63, 73, 71;
+  --mdui-color-on-surface-variant: 190, 201, 198;
+  --mdui-color-background: 16, 20, 19;
+  --mdui-color-on-background: 224, 227, 225;
+  --mdui-color-inverse-surface: 224, 227, 225;
+  --mdui-color-inverse-on-surface: 45, 49, 48;
+  --mdui-color-outline: 137, 147, 144;
+  --mdui-color-outline-variant: 63, 73, 71;
+  --mdui-color-surface-tint: 83, 219, 201;
+}
+
+/* 主色：green */
+body.mdui-theme-primary-green {
+  --mdui-color-primary: 0, 110, 28;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 148, 249, 144;
+  --mdui-color-on-primary-container: 0, 34, 4;
+  --mdui-color-inverse-primary: 120, 220, 119;
+  --mdui-color-secondary: 82, 99, 79;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 213, 232, 207;
+  --mdui-color-on-secondary-container: 17, 31, 15;
+  --mdui-color-surface: 249, 250, 244;
+  --mdui-color-on-surface: 26, 28, 25;
+  --mdui-color-surface-dim: 218, 218, 212;
+  --mdui-color-surface-bright: 249, 250, 244;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 243, 244, 238;
+  --mdui-color-surface-container: 238, 238, 232;
+  --mdui-color-surface-container-high: 232, 233, 226;
+  --mdui-color-surface-container-highest: 226, 227, 221;
+  --mdui-color-surface-variant: 222, 229, 216;
+  --mdui-color-on-surface-variant: 66, 73, 64;
+  --mdui-color-background: 249, 250, 244;
+  --mdui-color-on-background: 26, 28, 25;
+  --mdui-color-inverse-surface: 47, 49, 45;
+  --mdui-color-inverse-on-surface: 240, 241, 235;
+  --mdui-color-outline: 114, 121, 111;
+  --mdui-color-outline-variant: 194, 201, 189;
+  --mdui-color-surface-tint: 0, 110, 28;
+}
+
+body.mdui-theme-primary-green.mdui-theme-layout-dark {
+  --mdui-color-primary: 120, 220, 119;
+  --mdui-color-on-primary: 0, 57, 10;
+  --mdui-color-primary-container: 0, 83, 19;
+  --mdui-color-on-primary-container: 148, 249, 144;
+  --mdui-color-inverse-primary: 0, 110, 28;
+  --mdui-color-secondary: 186, 204, 179;
+  --mdui-color-on-secondary: 37, 52, 35;
+  --mdui-color-secondary-container: 59, 75, 56;
+  --mdui-color-on-secondary-container: 213, 232, 207;
+  --mdui-color-surface: 18, 20, 17;
+  --mdui-color-on-surface: 226, 227, 221;
+  --mdui-color-surface-dim: 18, 20, 17;
+  --mdui-color-surface-bright: 56, 58, 54;
+  --mdui-color-surface-container-lowest: 12, 15, 12;
+  --mdui-color-surface-container-low: 26, 28, 25;
+  --mdui-color-surface-container: 30, 32, 29;
+  --mdui-color-surface-container-high: 40, 43, 39;
+  --mdui-color-surface-container-highest: 51, 53, 49;
+  --mdui-color-surface-variant: 66, 73, 64;
+  --mdui-color-on-surface-variant: 194, 201, 189;
+  --mdui-color-background: 18, 20, 17;
+  --mdui-color-on-background: 226, 227, 221;
+  --mdui-color-inverse-surface: 226, 227, 221;
+  --mdui-color-inverse-on-surface: 47, 49, 45;
+  --mdui-color-outline: 140, 147, 136;
+  --mdui-color-outline-variant: 66, 73, 64;
+  --mdui-color-surface-tint: 120, 220, 119;
+}
+
+/* 主色：light-green */
+body.mdui-theme-primary-light-green {
+  --mdui-color-primary: 62, 106, 0;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 185, 244, 116;
+  --mdui-color-on-primary-container: 15, 32, 0;
+  --mdui-color-inverse-primary: 158, 215, 91;
+  --mdui-color-secondary: 87, 98, 73;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 219, 231, 200;
+  --mdui-color-on-secondary-container: 21, 30, 11;
+  --mdui-color-surface: 250, 250, 242;
+  --mdui-color-on-surface: 27, 28, 24;
+  --mdui-color-surface-dim: 219, 218, 211;
+  --mdui-color-surface-bright: 250, 250, 242;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 245, 244, 236;
+  --mdui-color-surface-container: 239, 238, 231;
+  --mdui-color-surface-container-high: 233, 232, 225;
+  --mdui-color-surface-container-highest: 227, 227, 219;
+  --mdui-color-surface-variant: 225, 228, 213;
+  --mdui-color-on-surface-variant: 68, 72, 61;
+  --mdui-color-background: 250, 250, 242;
+  --mdui-color-on-background: 27, 28, 24;
+  --mdui-color-inverse-surface: 48, 49, 44;
+  --mdui-color-inverse-on-surface: 242, 241, 233;
+  --mdui-color-outline: 117, 121, 108;
+  --mdui-color-outline-variant: 197, 200, 186;
+  --mdui-color-surface-tint: 62, 106, 0;
+}
+
+body.mdui-theme-primary-light-green.mdui-theme-layout-dark {
+  --mdui-color-primary: 158, 215, 91;
+  --mdui-color-on-primary: 30, 55, 0;
+  --mdui-color-primary-container: 46, 79, 0;
+  --mdui-color-on-primary-container: 185, 244, 116;
+  --mdui-color-inverse-primary: 62, 106, 0;
+  --mdui-color-secondary: 191, 203, 173;
+  --mdui-color-on-secondary: 42, 51, 30;
+  --mdui-color-secondary-container: 64, 74, 51;
+  --mdui-color-on-secondary-container: 219, 231, 200;
+  --mdui-color-surface: 18, 20, 16;
+  --mdui-color-on-surface: 227, 227, 219;
+  --mdui-color-surface-dim: 18, 20, 16;
+  --mdui-color-surface-bright: 56, 58, 53;
+  --mdui-color-surface-container-lowest: 13, 15, 11;
+  --mdui-color-surface-container-low: 27, 28, 24;
+  --mdui-color-surface-container: 31, 32, 28;
+  --mdui-color-surface-container-high: 41, 42, 38;
+  --mdui-color-surface-container-highest: 52, 53, 48;
+  --mdui-color-surface-variant: 68, 72, 61;
+  --mdui-color-on-surface-variant: 197, 200, 186;
+  --mdui-color-background: 18, 20, 16;
+  --mdui-color-on-background: 227, 227, 219;
+  --mdui-color-inverse-surface: 227, 227, 219;
+  --mdui-color-inverse-on-surface: 48, 49, 44;
+  --mdui-color-outline: 142, 146, 133;
+  --mdui-color-outline-variant: 68, 72, 61;
+  --mdui-color-surface-tint: 158, 215, 91;
+}
+
+/* 主色：lime */
+body.mdui-theme-primary-lime {
+  --mdui-color-primary: 91, 99, 0;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 221, 237, 73;
+  --mdui-color-on-primary-container: 26, 29, 0;
+  --mdui-color-inverse-primary: 193, 208, 44;
+  --mdui-color-secondary: 94, 96, 68;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 228, 229, 193;
+  --mdui-color-on-secondary-container: 27, 29, 7;
+  --mdui-color-surface: 252, 249, 240;
+  --mdui-color-on-surface: 28, 28, 23;
+  --mdui-color-surface-dim: 220, 218, 210;
+  --mdui-color-surface-bright: 252, 249, 240;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 246, 243, 235;
+  --mdui-color-surface-container: 241, 238, 229;
+  --mdui-color-surface-container-high: 235, 232, 223;
+  --mdui-color-surface-container-highest: 229, 226, 218;
+  --mdui-color-surface-variant: 229, 227, 210;
+  --mdui-color-on-surface-variant: 71, 72, 59;
+  --mdui-color-background: 252, 249, 240;
+  --mdui-color-on-background: 28, 28, 23;
+  --mdui-color-inverse-surface: 49, 49, 43;
+  --mdui-color-inverse-on-surface: 243, 241, 232;
+  --mdui-color-outline: 120, 120, 105;
+  --mdui-color-outline-variant: 200, 199, 183;
+  --mdui-color-surface-tint: 91, 99, 0;
+}
+
+body.mdui-theme-primary-lime.mdui-theme-layout-dark {
+  --mdui-color-primary: 193, 208, 44;
+  --mdui-color-on-primary: 47, 51, 0;
+  --mdui-color-primary-container: 68, 75, 0;
+  --mdui-color-on-primary-container: 221, 237, 73;
+  --mdui-color-inverse-primary: 91, 99, 0;
+  --mdui-color-secondary: 199, 201, 166;
+  --mdui-color-on-secondary: 48, 50, 26;
+  --mdui-color-secondary-container: 70, 73, 46;
+  --mdui-color-on-secondary-container: 228, 229, 193;
+  --mdui-color-surface: 19, 20, 15;
+  --mdui-color-on-surface: 229, 226, 218;
+  --mdui-color-surface-dim: 19, 20, 15;
+  --mdui-color-surface-bright: 58, 57, 52;
+  --mdui-color-surface-container-lowest: 14, 14, 10;
+  --mdui-color-surface-container-low: 28, 28, 23;
+  --mdui-color-surface-container: 32, 32, 27;
+  --mdui-color-surface-container-high: 42, 42, 37;
+  --mdui-color-surface-container-highest: 53, 53, 47;
+  --mdui-color-surface-variant: 71, 72, 59;
+  --mdui-color-on-surface-variant: 200, 199, 183;
+  --mdui-color-background: 19, 20, 15;
+  --mdui-color-on-background: 229, 226, 218;
+  --mdui-color-inverse-surface: 229, 226, 218;
+  --mdui-color-inverse-on-surface: 49, 49, 43;
+  --mdui-color-outline: 146, 146, 130;
+  --mdui-color-outline-variant: 71, 72, 59;
+  --mdui-color-surface-tint: 193, 208, 44;
+}
+
+/* 主色：yellow */
+body.mdui-theme-primary-yellow {
+  --mdui-color-primary: 105, 95, 0;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 249, 229, 52;
+  --mdui-color-on-primary-container: 32, 28, 0;
+  --mdui-color-inverse-primary: 219, 201, 10;
+  --mdui-color-secondary: 100, 95, 65;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 235, 227, 189;
+  --mdui-color-on-secondary-container: 31, 28, 5;
+  --mdui-color-surface: 254, 249, 240;
+  --mdui-color-on-surface: 29, 28, 22;
+  --mdui-color-surface-dim: 222, 218, 209;
+  --mdui-color-surface-bright: 254, 249, 240;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 248, 243, 234;
+  --mdui-color-surface-container: 242, 237, 228;
+  --mdui-color-surface-container-high: 236, 232, 223;
+  --mdui-color-surface-container-highest: 231, 226, 217;
+  --mdui-color-surface-variant: 232, 226, 208;
+  --mdui-color-on-surface-variant: 74, 71, 58;
+  --mdui-color-background: 254, 249, 240;
+  --mdui-color-on-background: 29, 28, 22;
+  --mdui-color-inverse-surface: 50, 48, 42;
+  --mdui-color-inverse-on-surface: 245, 240, 231;
+  --mdui-color-outline: 123, 119, 104;
+  --mdui-color-outline-variant: 203, 198, 181;
+  --mdui-color-surface-tint: 105, 95, 0;
+}
+
+body.mdui-theme-primary-yellow.mdui-theme-layout-dark {
+  --mdui-color-primary: 219, 201, 10;
+  --mdui-color-on-primary: 54, 49, 0;
+  --mdui-color-primary-container: 79, 72, 0;
+  --mdui-color-on-primary-container: 249, 229, 52;
+  --mdui-color-inverse-primary: 105, 95, 0;
+  --mdui-color-secondary: 206, 199, 163;
+  --mdui-color-on-secondary: 52, 49, 23;
+  --mdui-color-secondary-container: 75, 71, 43;
+  --mdui-color-on-secondary-container: 235, 227, 189;
+  --mdui-color-surface: 20, 19, 14;
+  --mdui-color-on-surface: 231, 226, 217;
+  --mdui-color-surface-dim: 20, 19, 14;
+  --mdui-color-surface-bright: 59, 57, 51;
+  --mdui-color-surface-container-lowest: 15, 14, 9;
+  --mdui-color-surface-container-low: 29, 28, 22;
+  --mdui-color-surface-container: 33, 32, 26;
+  --mdui-color-surface-container-high: 43, 42, 36;
+  --mdui-color-surface-container-highest: 54, 53, 47;
+  --mdui-color-surface-variant: 74, 71, 58;
+  --mdui-color-on-surface-variant: 203, 198, 181;
+  --mdui-color-background: 20, 19, 14;
+  --mdui-color-on-background: 231, 226, 217;
+  --mdui-color-inverse-surface: 231, 226, 217;
+  --mdui-color-inverse-on-surface: 50, 48, 42;
+  --mdui-color-outline: 149, 145, 129;
+  --mdui-color-outline-variant: 74, 71, 58;
+  --mdui-color-surface-tint: 219, 201, 10;
+}
+
+/* 主色：amber */
+body.mdui-theme-primary-amber {
+  --mdui-color-primary: 120, 89, 0;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 255, 223, 158;
+  --mdui-color-on-primary-container: 38, 26, 0;
+  --mdui-color-inverse-primary: 250, 189, 0;
+  --mdui-color-secondary: 107, 93, 63;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 245, 224, 187;
+  --mdui-color-on-secondary-container: 36, 26, 4;
+  --mdui-color-surface: 255, 248, 242;
+  --mdui-color-on-surface: 30, 27, 22;
+  --mdui-color-surface-dim: 224, 217, 208;
+  --mdui-color-surface-bright: 255, 248, 242;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 250, 242, 233;
+  --mdui-color-surface-container: 245, 237, 228;
+  --mdui-color-surface-container-high: 239, 231, 222;
+  --mdui-color-surface-container-highest: 233, 225, 216;
+  --mdui-color-surface-variant: 237, 225, 207;
+  --mdui-color-on-surface-variant: 77, 70, 57;
+  --mdui-color-background: 255, 248, 242;
+  --mdui-color-on-background: 30, 27, 22;
+  --mdui-color-inverse-surface: 51, 48, 42;
+  --mdui-color-inverse-on-surface: 247, 239, 231;
+  --mdui-color-outline: 127, 118, 103;
+  --mdui-color-outline-variant: 208, 197, 180;
+  --mdui-color-surface-tint: 120, 89, 0;
+}
+
+body.mdui-theme-primary-amber.mdui-theme-layout-dark {
+  --mdui-color-primary: 250, 189, 0;
+  --mdui-color-on-primary: 63, 46, 0;
+  --mdui-color-primary-container: 91, 67, 0;
+  --mdui-color-on-primary-container: 255, 223, 158;
+  --mdui-color-inverse-primary: 120, 89, 0;
+  --mdui-color-secondary: 216, 196, 160;
+  --mdui-color-on-secondary: 58, 47, 21;
+  --mdui-color-secondary-container: 82, 69, 42;
+  --mdui-color-on-secondary-container: 245, 224, 187;
+  --mdui-color-surface: 22, 19, 14;
+  --mdui-color-on-surface: 233, 225, 216;
+  --mdui-color-surface-dim: 22, 19, 14;
+  --mdui-color-surface-bright: 60, 57, 51;
+  --mdui-color-surface-container-lowest: 16, 14, 9;
+  --mdui-color-surface-container-low: 30, 27, 22;
+  --mdui-color-surface-container: 34, 31, 26;
+  --mdui-color-surface-container-high: 45, 41, 36;
+  --mdui-color-surface-container-highest: 56, 52, 46;
+  --mdui-color-surface-variant: 77, 70, 57;
+  --mdui-color-on-surface-variant: 208, 197, 180;
+  --mdui-color-background: 22, 19, 14;
+  --mdui-color-on-background: 233, 225, 216;
+  --mdui-color-inverse-surface: 233, 225, 216;
+  --mdui-color-inverse-on-surface: 51, 48, 42;
+  --mdui-color-outline: 153, 143, 128;
+  --mdui-color-outline-variant: 77, 70, 57;
+  --mdui-color-surface-tint: 250, 189, 0;
+}
+
+/* 主色：orange */
+body.mdui-theme-primary-orange {
+  --mdui-color-primary: 139, 80, 0;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 255, 220, 190;
+  --mdui-color-on-primary-container: 44, 22, 0;
+  --mdui-color-inverse-primary: 255, 184, 112;
+  --mdui-color-secondary: 114, 90, 66;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 255, 220, 190;
+  --mdui-color-on-secondary-container: 41, 24, 6;
+  --mdui-color-surface: 255, 248, 245;
+  --mdui-color-on-surface: 32, 27, 22;
+  --mdui-color-surface-dim: 227, 216, 209;
+  --mdui-color-surface-bright: 255, 248, 245;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 253, 242, 234;
+  --mdui-color-surface-container: 247, 236, 228;
+  --mdui-color-surface-container-high: 241, 230, 223;
+  --mdui-color-surface-container-highest: 235, 224, 217;
+  --mdui-color-surface-variant: 242, 223, 209;
+  --mdui-color-on-surface-variant: 81, 69, 58;
+  --mdui-color-background: 255, 248, 245;
+  --mdui-color-on-background: 32, 27, 22;
+  --mdui-color-inverse-surface: 53, 47, 43;
+  --mdui-color-inverse-on-surface: 250, 239, 231;
+  --mdui-color-outline: 131, 116, 104;
+  --mdui-color-outline-variant: 213, 195, 181;
+  --mdui-color-surface-tint: 139, 80, 0;
+}
+
+body.mdui-theme-primary-orange.mdui-theme-layout-dark {
+  --mdui-color-primary: 255, 184, 112;
+  --mdui-color-on-primary: 74, 40, 0;
+  --mdui-color-primary-container: 105, 60, 0;
+  --mdui-color-on-primary-container: 255, 220, 190;
+  --mdui-color-inverse-primary: 139, 80, 0;
+  --mdui-color-secondary: 225, 193, 164;
+  --mdui-color-on-secondary: 64, 44, 24;
+  --mdui-color-secondary-container: 89, 66, 44;
+  --mdui-color-on-secondary-container: 255, 220, 190;
+  --mdui-color-surface: 23, 18, 14;
+  --mdui-color-on-surface: 235, 224, 217;
+  --mdui-color-surface-dim: 23, 18, 14;
+  --mdui-color-surface-bright: 62, 56, 51;
+  --mdui-color-surface-container-lowest: 18, 13, 10;
+  --mdui-color-surface-container-low: 32, 27, 22;
+  --mdui-color-surface-container: 36, 31, 26;
+  --mdui-color-surface-container-high: 46, 41, 36;
+  --mdui-color-surface-container-highest: 58, 52, 47;
+  --mdui-color-surface-variant: 81, 69, 58;
+  --mdui-color-on-surface-variant: 213, 195, 181;
+  --mdui-color-background: 23, 18, 14;
+  --mdui-color-on-background: 235, 224, 217;
+  --mdui-color-inverse-surface: 235, 224, 217;
+  --mdui-color-inverse-on-surface: 53, 47, 43;
+  --mdui-color-outline: 157, 142, 129;
+  --mdui-color-outline-variant: 81, 69, 58;
+  --mdui-color-surface-tint: 255, 184, 112;
+}
+
+/* 主色：deep-orange */
+body.mdui-theme-primary-deep-orange {
+  --mdui-color-primary: 176, 47, 0;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 255, 219, 209;
+  --mdui-color-on-primary-container: 59, 9, 0;
+  --mdui-color-inverse-primary: 255, 181, 160;
+  --mdui-color-secondary: 119, 87, 78;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 255, 219, 209;
+  --mdui-color-on-secondary-container: 44, 21, 15;
+  --mdui-color-surface: 255, 248, 246;
+  --mdui-color-on-surface: 32, 26, 24;
+  --mdui-color-surface-dim: 228, 215, 212;
+  --mdui-color-surface-bright: 255, 248, 246;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 254, 241, 237;
+  --mdui-color-surface-container: 248, 235, 232;
+  --mdui-color-surface-container-high: 243, 229, 226;
+  --mdui-color-surface-container-highest: 237, 224, 220;
+  --mdui-color-surface-variant: 245, 222, 216;
+  --mdui-color-on-surface-variant: 83, 67, 63;
+  --mdui-color-background: 255, 248, 246;
+  --mdui-color-on-background: 32, 26, 24;
+  --mdui-color-inverse-surface: 54, 47, 45;
+  --mdui-color-inverse-on-surface: 251, 238, 235;
+  --mdui-color-outline: 133, 115, 110;
+  --mdui-color-outline-variant: 216, 194, 188;
+  --mdui-color-surface-tint: 176, 47, 0;
+}
+
+body.mdui-theme-primary-deep-orange.mdui-theme-layout-dark {
+  --mdui-color-primary: 255, 181, 160;
+  --mdui-color-on-primary: 95, 21, 0;
+  --mdui-color-primary-container: 134, 34, 0;
+  --mdui-color-on-primary-container: 255, 219, 209;
+  --mdui-color-inverse-primary: 176, 47, 0;
+  --mdui-color-secondary: 231, 189, 178;
+  --mdui-color-on-secondary: 68, 42, 34;
+  --mdui-color-secondary-container: 93, 64, 55;
+  --mdui-color-on-secondary-container: 255, 219, 209;
+  --mdui-color-surface: 24, 18, 16;
+  --mdui-color-on-surface: 237, 224, 220;
+  --mdui-color-surface-dim: 24, 18, 16;
+  --mdui-color-surface-bright: 63, 55, 53;
+  --mdui-color-surface-container-lowest: 18, 13, 11;
+  --mdui-color-surface-container-low: 32, 26, 24;
+  --mdui-color-surface-container: 37, 30, 28;
+  --mdui-color-surface-container-high: 47, 40, 39;
+  --mdui-color-surface-container-highest: 59, 51, 49;
+  --mdui-color-surface-variant: 83, 67, 63;
+  --mdui-color-on-surface-variant: 216, 194, 188;
+  --mdui-color-background: 24, 18, 16;
+  --mdui-color-on-background: 237, 224, 220;
+  --mdui-color-inverse-surface: 237, 224, 220;
+  --mdui-color-inverse-on-surface: 54, 47, 45;
+  --mdui-color-outline: 160, 140, 135;
+  --mdui-color-outline-variant: 83, 67, 63;
+  --mdui-color-surface-tint: 255, 181, 160;
+}
+
+/* 主色：brown */
+body.mdui-theme-primary-brown {
+  --mdui-color-primary: 154, 69, 34;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 255, 219, 207;
+  --mdui-color-on-primary-container: 56, 13, 0;
+  --mdui-color-inverse-primary: 255, 181, 154;
+  --mdui-color-secondary: 119, 87, 76;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 255, 219, 207;
+  --mdui-color-on-secondary-container: 44, 22, 13;
+  --mdui-color-surface: 255, 248, 246;
+  --mdui-color-on-surface: 32, 26, 24;
+  --mdui-color-surface-dim: 228, 215, 212;
+  --mdui-color-surface-bright: 255, 248, 246;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 254, 241, 237;
+  --mdui-color-surface-container: 248, 235, 231;
+  --mdui-color-surface-container-high: 243, 229, 226;
+  --mdui-color-surface-container-highest: 237, 224, 220;
+  --mdui-color-surface-variant: 245, 222, 214;
+  --mdui-color-on-surface-variant: 83, 67, 62;
+  --mdui-color-background: 255, 248, 246;
+  --mdui-color-on-background: 32, 26, 24;
+  --mdui-color-inverse-surface: 54, 47, 44;
+  --mdui-color-inverse-on-surface: 251, 238, 234;
+  --mdui-color-outline: 133, 115, 109;
+  --mdui-color-outline-variant: 216, 194, 187;
+  --mdui-color-surface-tint: 154, 69, 34;
+}
+
+body.mdui-theme-primary-brown.mdui-theme-layout-dark {
+  --mdui-color-primary: 255, 181, 154;
+  --mdui-color-on-primary: 91, 27, 0;
+  --mdui-color-primary-container: 123, 46, 13;
+  --mdui-color-on-primary-container: 255, 219, 207;
+  --mdui-color-inverse-primary: 154, 69, 34;
+  --mdui-color-secondary: 231, 190, 175;
+  --mdui-color-on-secondary: 68, 42, 32;
+  --mdui-color-secondary-container: 93, 64, 53;
+  --mdui-color-on-secondary-container: 255, 219, 207;
+  --mdui-color-surface: 24, 18, 16;
+  --mdui-color-on-surface: 237, 224, 220;
+  --mdui-color-surface-dim: 24, 18, 16;
+  --mdui-color-surface-bright: 63, 56, 53;
+  --mdui-color-surface-container-lowest: 18, 13, 11;
+  --mdui-color-surface-container-low: 32, 26, 24;
+  --mdui-color-surface-container: 37, 30, 28;
+  --mdui-color-surface-container-high: 47, 40, 38;
+  --mdui-color-surface-container-highest: 59, 51, 49;
+  --mdui-color-surface-variant: 83, 67, 62;
+  --mdui-color-on-surface-variant: 216, 194, 187;
+  --mdui-color-background: 24, 18, 16;
+  --mdui-color-on-background: 237, 224, 220;
+  --mdui-color-inverse-surface: 237, 224, 220;
+  --mdui-color-inverse-on-surface: 54, 47, 44;
+  --mdui-color-outline: 160, 141, 134;
+  --mdui-color-outline-variant: 83, 67, 62;
+  --mdui-color-surface-tint: 255, 181, 154;
+}
+
+/* 主色：grey */
+body.mdui-theme-primary-grey {
+  --mdui-color-primary: 0, 104, 116;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 151, 240, 255;
+  --mdui-color-on-primary-container: 0, 31, 36;
+  --mdui-color-inverse-primary: 79, 216, 235;
+  --mdui-color-secondary: 74, 98, 103;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 205, 231, 236;
+  --mdui-color-on-secondary-container: 5, 31, 35;
+  --mdui-color-surface: 248, 250, 250;
+  --mdui-color-on-surface: 25, 28, 29;
+  --mdui-color-surface-dim: 216, 218, 219;
+  --mdui-color-surface-bright: 248, 250, 250;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 242, 244, 244;
+  --mdui-color-surface-container: 236, 238, 239;
+  --mdui-color-surface-container-high: 230, 232, 233;
+  --mdui-color-surface-container-highest: 225, 227, 227;
+  --mdui-color-surface-variant: 219, 228, 230;
+  --mdui-color-on-surface-variant: 63, 72, 74;
+  --mdui-color-background: 248, 250, 250;
+  --mdui-color-on-background: 25, 28, 29;
+  --mdui-color-inverse-surface: 46, 49, 50;
+  --mdui-color-inverse-on-surface: 239, 241, 241;
+  --mdui-color-outline: 111, 121, 122;
+  --mdui-color-outline-variant: 191, 200, 202;
+  --mdui-color-surface-tint: 0, 104, 116;
+}
+
+body.mdui-theme-primary-grey.mdui-theme-layout-dark {
+  --mdui-color-primary: 79, 216, 235;
+  --mdui-color-on-primary: 0, 54, 61;
+  --mdui-color-primary-container: 0, 79, 88;
+  --mdui-color-on-primary-container: 151, 240, 255;
+  --mdui-color-inverse-primary: 0, 104, 116;
+  --mdui-color-secondary: 177, 203, 208;
+  --mdui-color-on-secondary: 28, 52, 56;
+  --mdui-color-secondary-container: 51, 75, 79;
+  --mdui-color-on-secondary-container: 205, 231, 236;
+  --mdui-color-surface: 16, 20, 21;
+  --mdui-color-on-surface: 225, 227, 227;
+  --mdui-color-surface-dim: 16, 20, 21;
+  --mdui-color-surface-bright: 54, 58, 58;
+  --mdui-color-surface-container-lowest: 11, 15, 15;
+  --mdui-color-surface-container-low: 25, 28, 29;
+  --mdui-color-surface-container: 29, 32, 33;
+  --mdui-color-surface-container-high: 39, 43, 43;
+  --mdui-color-surface-container-highest: 50, 53, 54;
+  --mdui-color-surface-variant: 63, 72, 74;
+  --mdui-color-on-surface-variant: 191, 200, 202;
+  --mdui-color-background: 16, 20, 21;
+  --mdui-color-on-background: 225, 227, 227;
+  --mdui-color-inverse-surface: 225, 227, 227;
+  --mdui-color-inverse-on-surface: 46, 49, 50;
+  --mdui-color-outline: 137, 146, 148;
+  --mdui-color-outline-variant: 63, 72, 74;
+  --mdui-color-surface-tint: 79, 216, 235;
+}
+
+/* 主色：blue-grey */
+body.mdui-theme-primary-blue-grey {
+  --mdui-color-primary: 0, 103, 131;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 189, 233, 255;
+  --mdui-color-on-primary-container: 0, 31, 42;
+  --mdui-color-inverse-primary: 101, 211, 255;
+  --mdui-color-secondary: 77, 97, 108;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 208, 230, 242;
+  --mdui-color-on-secondary-container: 8, 30, 39;
+  --mdui-color-surface: 248, 249, 251;
+  --mdui-color-on-surface: 25, 28, 30;
+  --mdui-color-surface-dim: 217, 218, 220;
+  --mdui-color-surface-bright: 248, 249, 251;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 242, 244, 246;
+  --mdui-color-surface-container: 237, 238, 240;
+  --mdui-color-surface-container-high: 231, 232, 234;
+  --mdui-color-surface-container-highest: 225, 226, 228;
+  --mdui-color-surface-variant: 220, 228, 233;
+  --mdui-color-on-surface-variant: 64, 72, 76;
+  --mdui-color-background: 248, 249, 251;
+  --mdui-color-on-background: 25, 28, 30;
+  --mdui-color-inverse-surface: 46, 49, 50;
+  --mdui-color-inverse-on-surface: 239, 241, 243;
+  --mdui-color-outline: 112, 120, 125;
+  --mdui-color-outline-variant: 192, 200, 205;
+  --mdui-color-surface-tint: 0, 103, 131;
+}
+
+body.mdui-theme-primary-blue-grey.mdui-theme-layout-dark {
+  --mdui-color-primary: 101, 211, 255;
+  --mdui-color-on-primary: 0, 53, 70;
+  --mdui-color-primary-container: 0, 77, 100;
+  --mdui-color-on-primary-container: 189, 233, 255;
+  --mdui-color-inverse-primary: 0, 103, 131;
+  --mdui-color-secondary: 180, 202, 214;
+  --mdui-color-on-secondary: 31, 51, 60;
+  --mdui-color-secondary-container: 53, 74, 83;
+  --mdui-color-on-secondary-container: 208, 230, 242;
+  --mdui-color-surface: 17, 20, 21;
+  --mdui-color-on-surface: 225, 226, 228;
+  --mdui-color-surface-dim: 17, 20, 21;
+  --mdui-color-surface-bright: 55, 58, 59;
+  --mdui-color-surface-container-lowest: 12, 15, 16;
+  --mdui-color-surface-container-low: 25, 28, 30;
+  --mdui-color-surface-container: 29, 32, 34;
+  --mdui-color-surface-container-high: 39, 42, 44;
+  --mdui-color-surface-container-highest: 50, 53, 55;
+  --mdui-color-surface-variant: 64, 72, 76;
+  --mdui-color-on-surface-variant: 192, 200, 205;
+  --mdui-color-background: 17, 20, 21;
+  --mdui-color-on-background: 225, 226, 228;
+  --mdui-color-inverse-surface: 225, 226, 228;
+  --mdui-color-inverse-on-surface: 46, 49, 50;
+  --mdui-color-outline: 138, 146, 151;
+  --mdui-color-outline-variant: 64, 72, 76;
+  --mdui-color-surface-tint: 101, 211, 255;
+}
+
+/* 主色：white */
+body.mdui-theme-primary-white {
+  --mdui-color-primary: 0, 104, 116;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 151, 240, 255;
+  --mdui-color-on-primary-container: 0, 31, 36;
+  --mdui-color-inverse-primary: 79, 216, 235;
+  --mdui-color-secondary: 74, 98, 103;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 205, 231, 236;
+  --mdui-color-on-secondary-container: 5, 31, 35;
+  --mdui-color-surface: 248, 250, 250;
+  --mdui-color-on-surface: 25, 28, 29;
+  --mdui-color-surface-dim: 216, 218, 219;
+  --mdui-color-surface-bright: 248, 250, 250;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 242, 244, 244;
+  --mdui-color-surface-container: 236, 238, 239;
+  --mdui-color-surface-container-high: 230, 232, 233;
+  --mdui-color-surface-container-highest: 225, 227, 227;
+  --mdui-color-surface-variant: 219, 228, 230;
+  --mdui-color-on-surface-variant: 63, 72, 74;
+  --mdui-color-background: 248, 250, 250;
+  --mdui-color-on-background: 25, 28, 29;
+  --mdui-color-inverse-surface: 46, 49, 50;
+  --mdui-color-inverse-on-surface: 239, 241, 241;
+  --mdui-color-outline: 111, 121, 122;
+  --mdui-color-outline-variant: 191, 200, 202;
+  --mdui-color-surface-tint: 0, 104, 116;
+}
+
+body.mdui-theme-primary-white.mdui-theme-layout-dark {
+  --mdui-color-primary: 79, 216, 235;
+  --mdui-color-on-primary: 0, 54, 61;
+  --mdui-color-primary-container: 0, 79, 88;
+  --mdui-color-on-primary-container: 151, 240, 255;
+  --mdui-color-inverse-primary: 0, 104, 116;
+  --mdui-color-secondary: 177, 203, 208;
+  --mdui-color-on-secondary: 28, 52, 56;
+  --mdui-color-secondary-container: 51, 75, 79;
+  --mdui-color-on-secondary-container: 205, 231, 236;
+  --mdui-color-surface: 16, 20, 21;
+  --mdui-color-on-surface: 225, 227, 227;
+  --mdui-color-surface-dim: 16, 20, 21;
+  --mdui-color-surface-bright: 54, 58, 58;
+  --mdui-color-surface-container-lowest: 11, 15, 15;
+  --mdui-color-surface-container-low: 25, 28, 29;
+  --mdui-color-surface-container: 29, 32, 33;
+  --mdui-color-surface-container-high: 39, 43, 43;
+  --mdui-color-surface-container-highest: 50, 53, 54;
+  --mdui-color-surface-variant: 63, 72, 74;
+  --mdui-color-on-surface-variant: 191, 200, 202;
+  --mdui-color-background: 16, 20, 21;
+  --mdui-color-on-background: 225, 227, 227;
+  --mdui-color-inverse-surface: 225, 227, 227;
+  --mdui-color-inverse-on-surface: 46, 49, 50;
+  --mdui-color-outline: 137, 146, 148;
+  --mdui-color-outline-variant: 63, 72, 74;
+  --mdui-color-surface-tint: 79, 216, 235;
+}
+
+/* 强调色：red（映射到 MD3 tertiary） */
+body.mdui-theme-accent-red {
+  --mdui-color-tertiary: 184, 29, 39;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 255, 218, 215;
+  --mdui-color-on-tertiary-container: 65, 0, 4;
+}
+
+body.mdui-theme-accent-red.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 255, 179, 174;
+  --mdui-color-on-tertiary: 104, 0, 12;
+  --mdui-color-tertiary-container: 147, 0, 21;
+  --mdui-color-on-tertiary-container: 255, 218, 215;
+}
+
+/* 强调色：pink（映射到 MD3 tertiary） */
+body.mdui-theme-accent-pink {
+  --mdui-color-tertiary: 187, 0, 84;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 255, 217, 223;
+  --mdui-color-on-tertiary-container: 63, 0, 24;
+}
+
+body.mdui-theme-accent-pink.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 255, 177, 193;
+  --mdui-color-on-tertiary: 102, 0, 42;
+  --mdui-color-tertiary-container: 143, 0, 63;
+  --mdui-color-on-tertiary-container: 255, 217, 223;
+}
+
+/* 强调色：purple（映射到 MD3 tertiary） */
+body.mdui-theme-accent-purple {
+  --mdui-color-tertiary: 162, 0, 187;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 255, 214, 254;
+  --mdui-color-on-tertiary-container: 53, 0, 63;
+}
+
+body.mdui-theme-accent-purple.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 250, 171, 255;
+  --mdui-color-on-tertiary: 87, 0, 102;
+  --mdui-color-tertiary-container: 123, 0, 143;
+  --mdui-color-on-tertiary-container: 255, 214, 254;
+}
+
+/* 强调色：deep-purple（映射到 MD3 tertiary） */
+body.mdui-theme-accent-deep-purple {
+  --mdui-color-tertiary: 104, 51, 234;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 232, 222, 255;
+  --mdui-color-on-tertiary-container: 32, 0, 95;
+}
+
+body.mdui-theme-accent-deep-purple.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 205, 189, 255;
+  --mdui-color-on-tertiary: 55, 0, 150;
+  --mdui-color-tertiary-container: 79, 0, 208;
+  --mdui-color-on-tertiary-container: 232, 222, 255;
+}
+
+/* 强调色：indigo（映射到 MD3 tertiary） */
+body.mdui-theme-accent-indigo {
+  --mdui-color-tertiary: 49, 77, 223;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 222, 224, 255;
+  --mdui-color-on-tertiary-container: 0, 15, 92;
+}
+
+body.mdui-theme-accent-indigo.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 186, 195, 255;
+  --mdui-color-on-tertiary: 0, 30, 145;
+  --mdui-color-tertiary-container: 5, 47, 200;
+  --mdui-color-on-tertiary-container: 222, 224, 255;
+}
+
+/* 强调色：blue（映射到 MD3 tertiary） */
+body.mdui-theme-accent-blue {
+  --mdui-color-tertiary: 0, 90, 194;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 216, 226, 255;
+  --mdui-color-on-tertiary-container: 0, 26, 66;
+}
+
+body.mdui-theme-accent-blue.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 173, 198, 255;
+  --mdui-color-on-tertiary: 0, 46, 106;
+  --mdui-color-tertiary-container: 0, 68, 149;
+  --mdui-color-on-tertiary-container: 216, 226, 255;
+}
+
+/* 强调色：light-blue（映射到 MD3 tertiary） */
+body.mdui-theme-accent-light-blue {
+  --mdui-color-tertiary: 0, 102, 138;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 195, 232, 255;
+  --mdui-color-on-tertiary-container: 0, 30, 44;
+}
+
+body.mdui-theme-accent-light-blue.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 122, 208, 255;
+  --mdui-color-on-tertiary: 0, 53, 73;
+  --mdui-color-tertiary-container: 0, 76, 105;
+  --mdui-color-on-tertiary-container: 195, 232, 255;
+}
+
+/* 强调色：cyan（映射到 MD3 tertiary） */
+body.mdui-theme-accent-cyan {
+  --mdui-color-tertiary: 0, 106, 106;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 3, 251, 252;
+  --mdui-color-on-tertiary-container: 0, 32, 32;
+}
+
+body.mdui-theme-accent-cyan.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 0, 221, 221;
+  --mdui-color-on-tertiary: 0, 55, 55;
+  --mdui-color-tertiary-container: 0, 79, 79;
+  --mdui-color-on-tertiary-container: 3, 251, 252;
+}
+
+/* 强调色：teal（映射到 MD3 tertiary） */
+body.mdui-theme-accent-teal {
+  --mdui-color-tertiary: 0, 107, 88;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 95, 251, 214;
+  --mdui-color-on-tertiary-container: 0, 32, 25;
+}
+
+body.mdui-theme-accent-teal.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 56, 222, 187;
+  --mdui-color-on-tertiary: 0, 56, 45;
+  --mdui-color-tertiary-container: 0, 81, 66;
+  --mdui-color-on-tertiary-container: 95, 251, 214;
+}
+
+/* 强调色：green（映射到 MD3 tertiary） */
+body.mdui-theme-accent-green {
+  --mdui-color-tertiary: 0, 108, 69;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 117, 251, 184;
+  --mdui-color-on-tertiary-container: 0, 33, 18;
+}
+
+body.mdui-theme-accent-green.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 85, 222, 158;
+  --mdui-color-on-tertiary: 0, 56, 34;
+  --mdui-color-tertiary-container: 0, 82, 51;
+  --mdui-color-on-tertiary-container: 117, 251, 184;
+}
+
+/* 强调色：light-green（映射到 MD3 tertiary） */
+body.mdui-theme-accent-light-green {
+  --mdui-color-tertiary: 62, 106, 0;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 171, 248, 83;
+  --mdui-color-on-tertiary-container: 15, 32, 0;
+}
+
+body.mdui-theme-accent-light-green.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 145, 219, 55;
+  --mdui-color-on-tertiary: 30, 55, 0;
+  --mdui-color-tertiary-container: 46, 79, 0;
+  --mdui-color-on-tertiary-container: 171, 248, 83;
+}
+
+/* 强调色：lime（映射到 MD3 tertiary） */
+body.mdui-theme-accent-lime {
+  --mdui-color-tertiary: 91, 99, 0;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 221, 237, 46;
+  --mdui-color-on-tertiary-container: 26, 29, 0;
+}
+
+body.mdui-theme-accent-lime.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 193, 209, 0;
+  --mdui-color-on-tertiary: 47, 51, 0;
+  --mdui-color-tertiary-container: 68, 75, 0;
+  --mdui-color-on-tertiary-container: 221, 237, 46;
+}
+
+/* 强调色：yellow（映射到 MD3 tertiary） */
+body.mdui-theme-accent-yellow {
+  --mdui-color-tertiary: 98, 98, 0;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 234, 234, 0;
+  --mdui-color-on-tertiary-container: 29, 29, 0;
+}
+
+body.mdui-theme-accent-yellow.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 205, 205, 0;
+  --mdui-color-on-tertiary: 50, 50, 0;
+  --mdui-color-tertiary-container: 73, 73, 0;
+  --mdui-color-on-tertiary-container: 234, 234, 0;
+}
+
+/* 强调色：amber（映射到 MD3 tertiary） */
+body.mdui-theme-accent-amber {
+  --mdui-color-tertiary: 113, 92, 0;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 255, 225, 123;
+  --mdui-color-on-tertiary-container: 35, 27, 0;
+}
+
+body.mdui-theme-accent-amber.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 234, 195, 43;
+  --mdui-color-on-tertiary: 59, 47, 0;
+  --mdui-color-tertiary-container: 86, 69, 0;
+  --mdui-color-on-tertiary-container: 255, 225, 123;
+}
+
+/* 强调色：orange（映射到 MD3 tertiary） */
+body.mdui-theme-accent-orange {
+  --mdui-color-tertiary: 135, 82, 0;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 255, 221, 186;
+  --mdui-color-on-tertiary-container: 43, 23, 0;
+}
+
+body.mdui-theme-accent-orange.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 255, 184, 102;
+  --mdui-color-on-tertiary: 72, 41, 0;
+  --mdui-color-tertiary-container: 103, 61, 0;
+  --mdui-color-on-tertiary-container: 255, 221, 186;
+}
+
+/* 强调色：deep-orange（映射到 MD3 tertiary） */
+body.mdui-theme-accent-deep-orange {
+  --mdui-color-tertiary: 173, 51, 6;
+  --mdui-color-on-tertiary: 255, 255, 255;
+  --mdui-color-tertiary-container: 255, 219, 208;
+  --mdui-color-on-tertiary-container: 58, 10, 0;
+}
+
+body.mdui-theme-accent-deep-orange.mdui-theme-layout-dark {
+  --mdui-color-tertiary: 255, 181, 159;
+  --mdui-color-on-tertiary: 94, 22, 0;
+  --mdui-color-tertiary-container: 133, 35, 0;
+  --mdui-color-on-tertiary-container: 255, 219, 208;
+}
+
+/* 白色主题：light */
+body.mdx-theme-white {
+  --mdui-color-primary: 0, 104, 116;
+  --mdui-color-on-primary: 255, 255, 255;
+  --mdui-color-primary-container: 151, 240, 255;
+  --mdui-color-on-primary-container: 0, 31, 36;
+  --mdui-color-inverse-primary: 79, 216, 235;
+  --mdui-color-secondary: 74, 98, 103;
+  --mdui-color-on-secondary: 255, 255, 255;
+  --mdui-color-secondary-container: 205, 231, 236;
+  --mdui-color-on-secondary-container: 5, 31, 35;
+  --mdui-color-surface: 255, 255, 255;
+  --mdui-color-on-surface: 25, 28, 29;
+  --mdui-color-surface-dim: 216, 218, 219;
+  --mdui-color-surface-bright: 255, 255, 255;
+  --mdui-color-surface-container-lowest: 255, 255, 255;
+  --mdui-color-surface-container-low: 252, 252, 252;
+  --mdui-color-surface-container: 248, 248, 248;
+  --mdui-color-surface-container-high: 244, 244, 244;
+  --mdui-color-surface-container-highest: 238, 238, 238;
+  --mdui-color-surface-variant: 236, 236, 236;
+  --mdui-color-on-surface-variant: 63, 72, 74;
+  --mdui-color-background: 255, 255, 255;
+  --mdui-color-on-background: 25, 28, 29;
+  --mdui-color-inverse-surface: 46, 49, 50;
+  --mdui-color-inverse-on-surface: 239, 241, 241;
+  --mdui-color-outline: 111, 121, 122;
+  --mdui-color-outline-variant: 191, 200, 202;
+  --mdui-color-surface-tint: 0, 104, 116;
+}
+
+/* 白色主题：dark */
+body.mdx-theme-white.mdui-theme-layout-dark {
+  --mdui-color-primary: 79, 216, 235;
+  --mdui-color-on-primary: 0, 54, 61;
+  --mdui-color-primary-container: 0, 79, 88;
+  --mdui-color-on-primary-container: 151, 240, 255;
+  --mdui-color-inverse-primary: 0, 104, 116;
+  --mdui-color-secondary: 177, 203, 208;
+  --mdui-color-on-secondary: 28, 52, 56;
+  --mdui-color-secondary-container: 51, 75, 79;
+  --mdui-color-on-secondary-container: 205, 231, 236;
+  --mdui-color-surface: 18, 18, 18;
+  --mdui-color-on-surface: 225, 227, 227;
+  --mdui-color-surface-dim: 16, 20, 21;
+  --mdui-color-surface-bright: 54, 58, 58;
+  --mdui-color-surface-container-lowest: 0, 0, 0;
+  --mdui-color-surface-container-low: 12, 12, 12;
+  --mdui-color-surface-container: 18, 18, 18;
+  --mdui-color-surface-container-high: 24, 24, 24;
+  --mdui-color-surface-container-highest: 30, 30, 30;
+  --mdui-color-surface-variant: 63, 72, 74;
+  --mdui-color-on-surface-variant: 191, 200, 202;
+  --mdui-color-background: 18, 18, 18;
+  --mdui-color-on-background: 225, 227, 227;
+  --mdui-color-inverse-surface: 225, 227, 227;
+  --mdui-color-inverse-on-surface: 46, 49, 50;
+  --mdui-color-outline: 137, 146, 148;
+  --mdui-color-outline-variant: 63, 72, 74;
+  --mdui-color-surface-tint: 79, 216, 235;
+}
+
