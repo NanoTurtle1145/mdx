@@ -813,6 +813,441 @@ html.mdx-md3 body.mdui-theme-layout-dark #mdx-cookie-notice i.mdui-icon {
 }
 
 /* ==========================================================================
+ * 11.7 MD3 浓厚化：标签 chips / 文章 meta / 评论卡片 / 翻页 / 排版细节
+ * ========================================================================== */
+
+/* ---- 文章标签：MD3 outlined chips ---- */
+html.mdx-md3 .mdx-post-tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    vertical-align: middle;
+}
+html.mdx-md3 .mdx-post-tag {
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 12px;
+    border: 1px solid rgba(var(--mdui-color-outline), 0.55) !important;
+    border-radius: var(--mdui-shape-corner-small) !important;
+    background-color: transparent !important;
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    font-size: var(--mdui-typescale-label-medium-size) !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    transition: background-color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard),
+        color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard),
+        border-color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard);
+}
+html.mdx-md3 .mdx-post-tag:hover {
+    background-color: rgba(var(--mdui-color-primary), 0.08) !important;
+    border-color: rgb(var(--mdui-color-primary)) !important;
+    color: rgb(var(--mdui-color-primary)) !important;
+}
+
+/* ---- 文章底部 meta：日期 chip + 面包屑 ---- */
+html.mdx-md3 .spanout:has(#crumbs) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+html.mdx-md3 .spanout:has(#crumbs) > i {
+    display: none !important;
+}
+html.mdx-md3 .spanout:has(#crumbs) > .mdui-divider {
+    display: none !important;
+}
+html.mdx-md3 .spanout .timeInPost {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: var(--mdui-shape-corner-full);
+    background-color: rgb(var(--mdui-color-surface-container-high)) !important;
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    font-size: var(--mdui-typescale-label-medium-size) !important;
+}
+html.mdx-md3 .spanout .timeInPost i {
+    font-size: 16px;
+    color: inherit !important;
+}
+html.mdx-md3 .spanout #crumbs {
+    flex-basis: 100%;
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(var(--mdui-color-outline-variant), 0.5);
+    color: rgb(var(--mdui-color-on-surface-variant));
+    font-size: var(--mdui-typescale-label-medium-size) !important;
+    line-height: 1.8;
+}
+html.mdx-md3 #crumbs a {
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    text-decoration: none !important;
+}
+html.mdx-md3 #crumbs a:hover {
+    color: rgb(var(--mdui-color-primary)) !important;
+}
+html.mdx-md3 #crumbs .current {
+    color: rgb(var(--mdui-color-on-surface)) !important;
+    font-weight: 500;
+}
+html.mdx-md3 #crumbs .mdx-spr {
+    opacity: 0.45;
+}
+
+/* ---- 评论：MD3 surface 列表项 ---- */
+html.mdx-md3 #comments .ajax-comments {
+    padding: 0;
+    margin: 0;
+}
+html.mdx-md3 #comments .ajax-comments > li.mdui-list-item {
+    background-color: rgb(var(--mdui-color-surface-container-low)) !important;
+    border-radius: var(--mdui-shape-corner-medium) !important;
+    padding: 14px 16px !important;
+    margin: 10px 0 !important;
+    width: auto !important;
+    align-items: flex-start !important;
+}
+html.mdx-md3 #comments .ajax-comments > li.mdui-divider-inset {
+    display: none !important;
+}
+html.mdx-md3 #comments .mdui-list-item-avatar {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    margin-right: 12px !important;
+}
+html.mdx-md3 #comments .mdui-list-item-avatar img {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    object-fit: cover;
+}
+html.mdx-md3 #comments .mdui-list-item-title {
+    color: rgb(var(--mdui-color-on-surface)) !important;
+    font-size: var(--mdui-typescale-title-small-size) !important;
+    font-weight: 500 !important;
+    line-height: var(--mdui-typescale-title-small-line-height) !important;
+}
+html.mdx-md3 #comments .mdui-list-item-title a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+html.mdx-md3 #comments .mdx-admin {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 8px;
+    margin-left: 6px;
+    border-radius: var(--mdui-shape-corner-full) !important;
+    background-color: rgb(var(--mdui-color-primary-container)) !important;
+    color: rgb(var(--mdui-color-on-primary-container)) !important;
+    font-size: 11px !important;
+    font-weight: 500;
+    vertical-align: middle;
+}
+html.mdx-md3 #comments .mdui-list-item-text {
+    color: rgba(var(--mdui-color-on-surface), 0.85) !important;
+    font-size: var(--mdui-typescale-body-medium-size) !important;
+    line-height: 1.75 !important;
+    margin-top: 4px;
+}
+html.mdx-md3 #comments .mdui-list-item-text p {
+    margin: 4px 0 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
+html.mdx-md3 #comments .mdx-reply-time {
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    font-size: 12px !important;
+}
+html.mdx-md3 #comments .comment-reply-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: 8px;
+    padding: 2px 10px;
+    border-radius: var(--mdui-shape-corner-full);
+    color: rgb(var(--mdui-color-primary)) !important;
+    font-size: var(--mdui-typescale-label-large-size);
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: background-color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard);
+}
+html.mdx-md3 #comments .comment-reply-link:hover {
+    background-color: rgba(var(--mdui-color-primary), 0.08) !important;
+}
+html.mdx-md3 #comments .comment-reply-link i {
+    font-size: 16px;
+    color: inherit !important;
+}
+html.mdx-md3 #comments .children {
+    margin: 0;
+    padding-left: 20px;
+}
+html.mdx-md3 #comments-navi {
+    margin-top: 12px;
+}
+
+/* ---- 文章底部 info 条：MD3 surface-container-low 带 ---- */
+html.mdx-md3 .spanout:has(#crumbs) {
+    background-color: rgb(var(--mdui-color-surface-container-low)) !important;
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    border-top: 1px solid rgba(var(--mdui-color-outline-variant), 0.5);
+    padding: 14px 20px 16px !important;
+    border-radius: 0 0 var(--mdui-shape-corner-large) var(--mdui-shape-corner-large);
+}
+html.mdx-md3 .spanout,
+html.mdx-md3 .spanout > a,
+html.mdx-md3 .timeInPost,
+html.mdx-md3 .mdui-theme-layout-dark .spanout,
+html.mdx-md3 .mdui-theme-layout-dark .spanout > a,
+html.mdx-md3 .mdui-theme-layout-dark .timeInPost {
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+}
+html.mdx-md3 .spanout .timeInPost {
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+}
+
+/* ---- 评论分页 ---- */
+html.mdx-md3 #comments-navi {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+html.mdx-md3 #comments-navi .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    border-radius: var(--mdui-shape-corner-full);
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    font-size: var(--mdui-typescale-label-large-size);
+    text-decoration: none !important;
+    transition: background-color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard);
+}
+html.mdx-md3 #comments-navi .page-numbers:hover {
+    background-color: rgba(var(--mdui-color-on-surface), 0.08) !important;
+}
+html.mdx-md3 #comments-navi .page-numbers.current {
+    background-color: rgb(var(--mdui-color-primary)) !important;
+    color: rgb(var(--mdui-color-on-primary)) !important;
+    font-weight: 500;
+}
+html.mdx-md3 #comments-navi .page-numbers.dots {
+    border: none;
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+}
+
+/* ---- 上一篇 / 下一篇：MD3 tonal 工具条 ---- */
+html.mdx-md3 .page-footer-nav,
+html.mdx-md3 .page-footer-nav.mdui-color-theme {
+    background-color: rgb(var(--mdui-color-surface-container-low)) !important;
+    color: rgb(var(--mdui-color-on-surface)) !important;
+    border-top: 1px solid rgba(var(--mdui-color-outline-variant), 0.5);
+    border-bottom: 1px solid rgba(var(--mdui-color-outline-variant), 0.5);
+    box-shadow: none !important;
+}
+html.mdx-md3 .page-footer-nav.mdui-color-theme * {
+    background-color: transparent !important;
+    color: inherit;
+}
+html.mdx-md3 .page-footer-nav a {
+    color: rgb(var(--mdui-color-on-surface)) !important;
+}
+html.mdx-md3 .page-footer-nav a:hover {
+    background-color: rgba(var(--mdui-color-on-surface), 0.05) !important;
+}
+html.mdx-md3 .page-footer-nav .page-footer-nav-direction {
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    font-size: var(--mdui-typescale-label-medium-size) !important;
+    letter-spacing: 0.2px;
+}
+html.mdx-md3 .page-footer-nav .page-footer-nav-chapter {
+    color: rgb(var(--mdui-color-on-surface)) !important;
+    font-size: var(--mdui-typescale-title-medium-size) !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+}
+html.mdx-md3 .page-footer-nav a i {
+    color: rgb(var(--mdui-color-primary)) !important;
+}
+
+/* ---- 正文排版细节：节奏 / 分隔线 / 列表 ---- */
+html.mdx-md3 article h2 {
+    margin-top: 1.9em !important;
+    margin-bottom: 0.7em !important;
+}
+html.mdx-md3 article h3 {
+    margin-top: 1.6em !important;
+    margin-bottom: 0.6em !important;
+}
+html.mdx-md3 article h5,
+html.mdx-md3 article h6 {
+    color: rgb(var(--mdui-color-on-surface)) !important;
+    font-weight: 500 !important;
+}
+html.mdx-md3 article h5 {
+    font-size: var(--mdui-typescale-title-small-size) !important;
+}
+html.mdx-md3 article h6 {
+    font-size: var(--mdui-typescale-body-large-size) !important;
+    letter-spacing: 0.2px;
+}
+html.mdx-md3 article hr {
+    border: none !important;
+    border-top: 1px solid rgba(var(--mdui-color-outline-variant), 0.6) !important;
+    margin: 2em 0 !important;
+}
+html.mdx-md3 article ul li::marker,
+html.mdx-md3 article ol li::marker {
+    color: rgb(var(--mdui-color-primary));
+}
+html.mdx-md3 article table td {
+    padding: 10px 14px !important;
+    border-color: rgba(var(--mdui-color-outline-variant), 0.6) !important;
+}
+html.mdx-md3 article table th {
+    padding: 10px 14px !important;
+}
+html.mdx-md3 article.mdui-typo a {
+    transition: color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard),
+        border-color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard);
+}
+html.mdx-md3 article.mdui-typo a:hover {
+    border-bottom-color: rgb(var(--mdui-color-primary));
+}
+
+/* ---- 卡片操作区 / 信息标签 ---- */
+html.mdx-md3 .mdui-card-actions .info {
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    font-size: var(--mdui-typescale-label-medium-size) !important;
+}
+html.mdx-md3 .mdui-card-actions .info-icon {
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    opacity: 0.85;
+    font-size: 18px !important;
+}
+html.mdx-md3 .coun-read {
+    font-weight: 500 !important;
+}
+
+/* ---- 首页卡片「阅读文章」：MD3 tonal 按钮 ---- */
+html.mdx-md3 .coun-read {
+    display: inline-flex !important;
+    align-items: center;
+    height: 32px !important;
+    padding: 0 16px !important;
+    background-color: rgb(var(--mdui-color-secondary-container)) !important;
+    color: rgb(var(--mdui-color-on-secondary-container)) !important;
+    border-radius: var(--mdui-shape-corner-full) !important;
+    font-size: var(--mdui-typescale-label-large-size) !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: box-shadow var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard);
+}
+html.mdx-md3 .coun-read:hover {
+    box-shadow: inset 0 0 0 999px rgba(var(--mdui-color-on-secondary-container), 0.08) !important;
+}
+
+/* ---- 标签云页面：MD3 chips ---- */
+html.mdx-md3 .page-tags .tag-cloud-link {
+    display: inline-flex !important;
+    align-items: center;
+    height: 32px;
+    padding: 0 14px;
+    margin: 4px 2px;
+    border: 1px solid rgba(var(--mdui-color-outline), 0.5);
+    border-radius: var(--mdui-shape-corner-full) !important;
+    background-color: rgb(var(--mdui-color-surface-container-low)) !important;
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    font-size: var(--mdui-typescale-label-large-size) !important;
+    font-weight: 500;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    transition: background-color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard),
+        border-color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard),
+        color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard);
+}
+html.mdx-md3 .page-tags .tag-cloud-link:hover {
+    background-color: rgba(var(--mdui-color-primary), 0.08) !important;
+    border-color: rgb(var(--mdui-color-primary)) !important;
+    color: rgb(var(--mdui-color-primary)) !important;
+}
+
+/* ---- 页脚快捷链接 chips ---- */
+html.mdx-md3 footer.foot {
+    padding: 26px 20px 22px !important;
+}
+html.mdx-md3 footer.foot .mdx-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+html.mdx-md3 footer.foot .mdx-footer-links a {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    border: 1px solid rgba(var(--mdui-color-outline), 0.5);
+    border-radius: var(--mdui-shape-corner-full);
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+    font-size: var(--mdui-typescale-label-medium-size);
+    text-decoration: none;
+    transition: background-color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard),
+        color var(--mdui-motion-duration-short3) var(--mdui-motion-easing-standard);
+}
+html.mdx-md3 footer.foot .mdx-footer-links a:hover {
+    background-color: rgba(var(--mdui-color-primary), 0.08);
+    border-color: rgb(var(--mdui-color-primary));
+    color: rgb(var(--mdui-color-primary)) !important;
+}
+html.mdx-md3 footer.foot .mdx-footer-links-sep {
+    display: none !important;
+}
+
+/* ---- 抽屉导航细节 ---- */
+html.mdx-md3 .mdui-drawer .mdui-list-item {
+    height: 46px;
+    min-height: 46px;
+    margin: 2px 0;
+    padding: 0 16px;
+    border-radius: var(--mdui-shape-corner-full) !important;
+    font-size: var(--mdui-typescale-body-large-size);
+}
+html.mdx-md3 .mdui-drawer .mdui-list-item i {
+    color: rgb(var(--mdui-color-on-surface-variant)) !important;
+}
+html.mdx-md3 .mdui-drawer .mdui-list-item.current-menu-item i,
+html.mdx-md3 .mdui-drawer .mdui-list-item.mdui-list-item-active i {
+    color: rgb(var(--mdui-color-on-secondary-container)) !important;
+}
+html.mdx-md3 .mdx-side-title {
+    padding: 6px 16px 10px;
+}
+
+/* ---- 按钮：填充态的 MD3 状态层 / 抬升 ---- */
+html.mdx-md3 .mdui-btn.mdui-color-theme:hover,
+html.mdx-md3 .mdui-btn.mdui-color-theme-accent:hover {
+    box-shadow: inset 0 0 0 999px rgba(var(--mdui-color-on-primary), 0.08) !important;
+}
+html.mdx-md3 .mdui-btn.mdui-btn-raised {
+    box-shadow: var(--mdui-elevation-level1) !important;
+}
+html.mdx-md3 .mdui-btn.mdui-btn-raised:hover {
+    box-shadow: var(--mdui-elevation-level2) !important;
+}
+
+/* ==========================================================================
  * 12. 响应式
  * ========================================================================== */
 @media (max-width: 840px) {
@@ -849,5 +1284,32 @@ html.mdx-md3 body.mdui-theme-layout-dark #mdx-cookie-notice i.mdui-icon {
     html.mdx-md3 .mdui-btn,
     html.mdx-md3 .mdui-fab {
         box-shadow: none !important;
+    }
+}
+
+/* MD3 浓厚化：移动端细节 */
+@media (max-width: 840px) {
+    html.mdx-md3 #comments .ajax-comments > li.mdui-list-item {
+        padding: 12px 14px !important;
+        margin: 8px 0 !important;
+    }
+    html.mdx-md3 #comments .mdui-list-item-avatar,
+    html.mdx-md3 #comments .mdui-list-item-avatar img {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+    }
+    html.mdx-md3 #comments .children {
+        padding-left: 10px;
+    }
+    html.mdx-md3 .page-footer-nav .page-footer-nav-chapter {
+        font-size: var(--mdui-typescale-body-large-size) !important;
+    }
+    html.mdx-md3 footer.foot {
+        padding: 20px 14px 18px !important;
+    }
+    html.mdx-md3 .spanout:has(#crumbs) {
+        border-radius: 0 !important;
+        padding: 12px 16px 14px !important;
     }
 }

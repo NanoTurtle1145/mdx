@@ -349,6 +349,24 @@ body.mdui-theme-layout-dark .mdx-search-empty-title {
 add_action('wp_enqueue_scripts', 'mdx_extra_inline_css', 30);
 
 
+
+/**
+ * 文章标签 chips（MD3 风格标签）。
+ * 替代主题原来的 the_tags('#',' #','') 输出，避免分隔符文本破坏 chip 布局。
+ */
+function mdx_post_tags_chips() {
+    $tags = get_the_tags();
+    if (empty($tags)) {
+        _e('没有标签', 'mdx');
+        return;
+    }
+    echo '<span class="mdx-post-tags">';
+    foreach ($tags as $tag) {
+        echo '<a rel="tag" class="mdx-post-tag" href="' . esc_url(get_tag_link($tag->term_id)) . '">#' . esc_html($tag->name) . '</a>';
+    }
+    echo '</span>';
+}
+
 /* ==========================================================================
  * 11. 页脚自定义：署名 / 快捷链接 / 附加内容
  * ========================================================================== */
